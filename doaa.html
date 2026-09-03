@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>باب الدعاء</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-page: #fff9fb;            
+            --card-white: #ffffff;
+            --rose-accent: #d47a94;        
+            --rose-light: #fbebf0;         
+            --border-color: #f3e2e8;       
+            --text-main: #2d2629;          
+            --text-muted: #7d6f73;
+            
+            --font-authentic: 'Amiri', serif;
+            --font-title: 'Aref Ruqaa', serif;
+            
+            --user-font-size: 1.15rem;
+            --user-font-weight: normal;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: #f0e6ea;
+            font-family: var(--font-authentic);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 420px;
+            background-color: var(--bg-page);
+            padding: 20px 20px 30px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            min-height: 100vh;
+        }
+
+        /* أدوات التحكم في الخط */
+        .font-controls {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            padding-bottom: 5px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .control-btn {
+            background: var(--card-white);
+            border: 1px solid var(--border-color);
+            color: var(--rose-accent);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .control-btn:hover {
+            background-color: var(--rose-light);
+        }
+
+        /* الكارت الرئيسي */
+        .section-card {
+            background-color: var(--card-white);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 18px;
+            box-shadow: 0 6px 15px rgba(232, 165, 184, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .dua-header {
+            text-align: center;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .dua-main-title {
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            color: var(--rose-accent);
+            margin-bottom: 6px;
+        }
+
+        .dua-main-ayah {
+            font-size: var(--user-font-size);
+            font-weight: var(--user-font-weight);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .dua-main-surah {
+            font-size: 0.85rem;
+            color: var(--rose-accent);
+            display: block;
+            margin-top: 4px;
+        }
+
+        /* الأبواب الثلاثة */
+        .dua-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .dua-option-btn {
+            background-color: var(--rose-light);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 12px 16px;
+            text-align: right;
+            color: var(--text-main);
+            font-family: var(--font-authentic);
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .dua-option-btn:hover {
+            background-color: #f6dce4;
+            border-color: var(--rose-accent);
+            transform: translateX(-3px);
+        }
+
+        .dua-option-btn i {
+            color: var(--rose-accent);
+            font-size: 1.1rem;
+        }
+
+        /* بطاقة أدعية القرآن العشوائية */
+        .quranic-duas-card {
+            background-color: var(--rose-light);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+      
+        .quranic-duas-title {
+            font-size: 1.2rem;
+            color: var(--rose-accent);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .random-dua-box {
+            background-color: var(--card-white);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            box-shadow: 0 2px 8px rgba(212, 122, 148, 0.05);
+        }
+
+        .random-dua-name {
+            font-size: 1.05rem;
+            font-weight: bold;
+            color: var(--rose-accent);
+        }
+
+        .random-dua-text {
+            font-size: 1.25rem;
+            color: var(--text-main);
+            font-weight: var(--user-font-weight);
+            text-align: center;
+            line-height: 1.8;
+            padding: 8px 0;
+            border-top: 1px dashed var(--border-color);
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .random-dua-source, .random-dua-virtue {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .random-dua-tag {
+            font-size: 0.85rem;
+            color: var(--rose-accent);
+            background-color: var(--rose-light);
+            padding: 4px 10px;
+            border-radius: 8px;
+            align-self: flex-start;
+        }
+
+        .shuffle-btn {
+            background: var(--rose-accent);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 12px;
+            font-family: var(--font-authentic);
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .shuffle-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* نظام العرض الديناميكي للأقسام الفرعية */
+        .sub-section {
+            display: none;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .sub-section.active {
+            display: flex;
+        }
+
+        .back-btn {
+            background: var(--card-white);
+            border: 1px solid var(--rose-accent);
+            color: var(--rose-accent);
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-family: var(--font-authentic);
+            font-size: 1rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            align-self: flex-start;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background-color: var(--rose-light);
+        }
+
+        .sub-title {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            color: var(--rose-accent);
+            text-align: center;
+        }
+
+        .sub-content-box {
+            background-color: var(--rose-light);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px;
+            font-size: var(--user-font-size);
+            color: var(--text-main);
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        /* لمسة الإهداء */
+        .personal-footer {
+            text-align: center;
+            padding: 14px 12px;
+            background-color: var(--rose-light);
+            border-radius: 16px;
+            border: 1px dashed var(--border-color);
+        }
+
+        .personal-footer p {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        .dua-item-card {
+            background: var(--card-white);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .dua-item-title { color: var(--rose-accent); font-weight: bold; font-size: 1.05rem; }
+        .dua-item-text { color: var(--text-main); font-size: var(--user-font-size); font-weight: var(--user-font-weight); line-height: 1.9; text-align: center; }
+        .dua-item-source { color: var(--text-muted); font-size: .88rem; line-height: 1.5; }
+    
+.search-box{margin-top:18px;}
+.search-input-wrap{display:flex;align-items:center;gap:10px;background:var(--card-bg,#fff);border:1px solid var(--border-color,#ddd);border-radius:18px;padding:10px 14px;box-shadow:0 4px 14px rgba(0,0,0,.05);}
+.search-input-wrap i{color:var(--primary-color,#6c63ff);font-size:1.1rem;}
+#duaSearchInput{flex:1;border:0;outline:0;background:transparent;color:var(--text-color,#222);font-family:inherit;font-size:1rem;direction:rtl;min-width:0;}
+.clear-search{border:0;background:transparent;font-size:1.5rem;line-height:1;cursor:pointer;color:var(--text-muted,#888);display:none;}
+.search-hints{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:12px 0;font-size:.9rem;color:var(--text-muted,#777);}
+.search-hints button{border:1px solid var(--border-color,#ddd);background:transparent;border-radius:999px;padding:5px 11px;cursor:pointer;color:inherit;font-family:inherit;}
+.search-result-count{font-size:.9rem;color:var(--text-muted,#777);margin:12px 2px;}
+.search-results{display:grid;gap:12px;}
+.search-results .dua-item-card{display:block;}
+.search-empty{padding:28px 18px;text-align:center;color:var(--text-muted,#777);border:1px dashed var(--border-color,#ddd);border-radius:16px;}
+.search-highlight{background:rgba(255,210,80,.45);border-radius:4px;padding:0 2px;}
+</style>
+</head>
+<body>
+<i class="fa-solid fa-arrow-right" onclick="window.location.href='dikra.html'" style="cursor: pointer; position: absolute; top: 15px; right: 20px; font-size: 18px; color: #d47a94;"></i>
+
+
+<div class="app-container">
+
+    <div class="font-controls">
+        <button class="control-btn" onclick="adjustFontSize(1)" title="تكبير الخط"><i class="fa-solid fa-plus"></i></button>
+        <button class="control-btn" onclick="adjustFontSize(-1)" title="تصغير الخط"><i class="fa-solid fa-minus"></i></button>
+        <button class="control-btn" onclick="toggleFontWeight()" title="تغيير خشونّة الخط"><i class="fa-solid fa-bold"></i></button>
+    </div>
+
+    <div class="section-card" id="mainDuaSection">
+        <div class="dua-header">
+            <div class="dua-main-title">أُدْعُ اللَّهَ</div>
+            <div class="dua-main-ayah">﴿وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ أُجِيبُ دَعْوَةَ الدَّاعِ إِذَا دَعَانِ﴾</div>
+            <span class="dua-main-surah">[سورة البقرة: 186]</span>
+        </div>
+
+        <div class="dua-grid">
+            <button class="dua-option-btn" onclick="openSubSection('heartSection')">
+                <i class="fa-solid fa-heart-pulse"></i>
+                <span>1/ كيف قلبك</span>
+            </button>
+            <button class="dua-option-btn" onclick="openSubSection('situationSection')">
+                <i class="fa-solid fa-compass"></i>
+                <span>2/ إختر موقفك</span>
+            </button>
+            <button class="dua-option-btn" onclick="openSubSection('searchSection')">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>3/ أبحث عن دعاء</span>
+            </button>
+        </div>  
+      
+        <div class="quranic-duas-card">
+            <div class="quranic-duas-title">
+     <i class="fa-solid fa-book-quran"></i>
+         <span>أدعية القرآن</span>
+            </div>
+
+            <div class="random-dua-box" id="duaContainer">
+                </div>
+
+            <button class="shuffle-btn" onclick="showRandomDua()">
+                <i class="fa-solid fa-rotate"></i>
+                <span>دعاء آخر عشوائي</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="section-card sub-section" id="heartSection">
+    <button class="back-btn" onclick="backToMain()"><i class="fa-solid fa-arrow-right"></i> عودة للأبواب</button>
+    <div class="sub-title">كيف حال قلبك؟</div>
+    <div class="dua-grid">
+        <button class="dua-option-btn" onclick="openSubSection('subHeart1')"><i class="fa-solid fa-cloud-rain"></i> 1. الهم والحزن</button>
+        <button class="dua-option-btn" onclick="openSubSection('subHeart2')"><i class="fa-solid fa-shield-halved"></i> 2. الخوف والقلق</button>
+        <button class="dua-option-btn" onclick="openSubSection('subHeart3')"><i class="fa-solid fa-bolt"></i> 3. الكرب والشدائد</button>
+        <button class="dua-option-btn" onclick="openSubSection('subHeart4')"><i class="fa-solid fa-face-angry"></i> 4. الغضب</button>
+        <button class="dua-option-btn" onclick="openSubSection('subHeart5')"><i class="fa-solid fa-seedling"></i> 5. الصبر والثبات</button>
+        <button class="dua-option-btn" onclick="openSubSection('subHeart6')"><i class="fa-solid fa-hand-holding-heart"></i> 6. التوبة والرجوع</button>
+        <button class="dua-option-btn" onclick="openSubSection('subHeart7')"><i class="fa-solid fa-arrows-split-up-and-left"></i> 7. الحيرة والتوكل</button>
+        <button class="dua-option-btn" onclick="openSubSection('subHeart8')"><i class="fa-solid fa-face-smile-beam"></i> 8. الفرح والشكر</button>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subHeart1">
+    <button class="back-btn" onclick="openSubSection('heartSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">الهم والحزن</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">① دعاء الهم والحزن</div>
+        <div class="dua-item-text">اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَأَعُوذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ، وَأَعُوذُ بِكَ مِنَ الْجُبْنِ وَالْبُخْلِ، وَأَعُوذُ بِكَ مِنْ ضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ.</div>
+        <div class="dua-item-source">🕌 نبوي — صحيح البخاري</div>
+    </div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">② دعاء موسى عليه السلام</div>
+        <div class="dua-item-text">رَبِّ إِنِّي لِمَا أَنْزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ.</div>
+        <div class="dua-item-source">📖 قرآني — سورة القصص: 24</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">③ دعاء تفريج الكرب</div>
+        <div class="dua-item-text">لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ.</div>
+        <div class="dua-item-source">📖 قرآني — سورة الأنبياء: 87</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subHeart2">
+    <button class="back-btn" onclick="openSubSection('heartSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">الخوف والقلق</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">① دعاء الخوف والتوكل</div>
+        <div class="dua-item-text">حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ.</div>
+        <div class="dua-item-source">📖 قرآني — سورة آل عمران: 173</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">② دعاء عند الخوف من شيء</div>
+        <div class="dua-item-text">اللَّهُمَّ إِنَّا نَجْعَلُكَ فِي نُحُورِهِمْ، وَنَعُوذُ بِكَ مِنْ شُرُورِهِمْ.</div>
+        <div class="dua-item-source">🕌 نبوي — رواه أبو داود</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">③ دعاء عند الفزع</div>
+        <div class="dua-item-text">أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ.</div>
+        <div class="dua-item-source">🕌 نبوي — صحيح مسلم</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subHeart3">
+    <button class="back-btn" onclick="openSubSection('heartSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">الكرب والشدائد</div>
+    
+    <div class="dua-item-card">
+    <div class="dua-item-title">① دعاء الكرب العظيم</div>
+        <div class="dua-item-text">لَا إِلَهَ إِلَّا اللَّهُ الْعَظِيمُ الْحَلِيمُ، لَا إِلَهَ إِلَّا اللَّهُ رَبُّ الْعَرْشِ الْعَظِيمِ، لَا إِلَهَ إِلَّا اللَّهُ رَبُّ السَّمَاوَاتِ، وَرَبُّ الْأَرْضِ، وَرَبُّ الْعَرْشِ الْكَرِيمِ.</div>
+        <div class="dua-item-source">🕌 نبوي — صحيح البخاري ومسلم</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">③ دعاء عند البلاء</div>
+        <div class="dua-item-text">اللَّهُمَّ أْجُرْنِي فِي مُصِيبَتِي، وَأَخْلِفْ لِي خَيْرًا مِنْهَا.</div>
+        <div class="dua-item-source">🕌 نبوي — صحيح مسلم</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subHeart4">
+    <button class="back-btn" onclick="openSubSection('heartSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">الغضب</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">① الاستعاذة النبوية</div>
+        <div class="dua-item-text">أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ.<br><small style="color:var(--rose-accent); display:block; margin-top:6px;">💡 توجيه نبوي: وإن اشتد غضبك، فاسكت.</small></div>
+        <div class="dua-item-source">🕌 نبوي — صحيح البخاري ومسلم</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">② دعاء الاستعاذة من سوء الأخلاق</div>
+        <div class="dua-item-text">اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ سُوءِ الْأَخْلَاقِ وَالْأَعْمَالِ وَالْأَهْوَاءِ.</div>
+        <div class="dua-item-source">🕌 نبوي — رواه الترمذي</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subHeart5">
+    <button class="back-btn" onclick="openSubSection('heartSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">الصبر والثبات</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">① دعاء الصبر</div>
+        <div class="dua-item-text">رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَتَوَفَّنَا مُسْلِمِينَ.</div>
+        <div class="dua-item-source">📖 قرآني — سورة الأعراف: 126</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">② دعاء الثبات على الهداية</div>
+        <div class="dua-item-text">رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً ۚ إِنَّكَ أَنْتَ الْوَهَّابُ.</div>
+        <div class="dua-item-source">📖 قرآني — سورة آل عمران: 8</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">③ دعاء الاستعانة على الطاعة</div>
+        <div class="dua-item-text">اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ.</div>
+        <div class="dua-item-source">🕌 نبوي — رواه أبو داود والنسائي</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subHeart6">
+    <button class="back-btn" onclick="openSubSection('heartSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">التوبة والرجوع</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">① دعاء آدم وحواء</div>
+        <div class="dua-item-text">رَبَّنَا ظَلَمْنَا أَنْفُسَنَا وَإِنْ لَمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ.</div>
+        <div class="dua-item-source">📖 قرآني — سورة الأعراف: 23</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">② سيد الاستغفار</div>
+        <div class="dua-item-text">اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ...</div>
+        <div class="dua-item-source">🕌 نبوي — صحيح البخاري</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">③ دعاء التوبة المختصر</div>
+        <div class="dua-item-text">رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ، إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ.</div>
+        <div class="dua-item-source">🕌 نبوي — رواه أبو داود والترمذي</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subHeart7">
+    <button class="back-btn" onclick="openSubSection('heartSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">الحيرة والتوكل</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">① دعاء الاستخارة</div>
+        <div class="dua-item-text">اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ، وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ، وَأَسْأَلُكَ مِنْ فَضْلِكَ العَظِيمِ...</div>
+        <div class="dua-item-source">🕌 نبوي — صحيح البخاري</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">② آية التوكل</div>
+        <div class="dua-item-text">حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ ۖ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ.</div>
+        <div class="dua-item-source">📖 قرآني — سورة التوبة: 129</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subHeart8">
+    <button class="back-btn" onclick="openSubSection('heartSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">الفرح والشكر</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">① دعاء شكر النعم</div>
+        <div class="dua-item-text">رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَىٰ وَالِدَيَّ وَأَنْ أَعْمَلَ صَالِحًا تَرْضَاهُ...</div>
+        <div class="dua-item-source">📖 قرآني — سورة النمل: 19</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">② دعاء جامع لخيري الدنيا والآخرة</div>
+        <div class="dua-item-text">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ.</div>
+        <div class="dua-item-source">📖 قرآني / 🕌 نبوي — متفق عليه</div>
+    </div>
+</div>
+    
+     <div class="section-card sub-section" id="situationSection">
+    <button class="back-btn" onclick="backToMain()"><i class="fa-solid fa-arrow-right"></i> عودة للأبواب</button>
+    <div class="sub-title">اختر موقفك</div>
+    <div class="dua-grid">
+        <button class="dua-option-btn" onclick="openSubSection('subSit1')"><i class="fa-solid fa-graduation-cap"></i> 1. الدراسة وطلب العلم</button>
+        <button class="dua-option-btn" onclick="openSubSection('subSit2')"><i class="fa-solid fa-plane"></i> 2. السفر والركوب والرجوع</button>
+        <button class="dua-option-btn" onclick="openSubSection('subSit3')"><i class="fa-solid fa-car"></i> 3. ركوب السيارة</button>
+        <button class="dua-option-btn" onclick="openSubSection('subSit4')"><i class="fa-solid fa-house"></i> 4. دخول البيت والخروج منه</button>
+        <button class="dua-option-btn" onclick="openSubSection('subSit5')"><i class="fa-solid fa-shirt"></i> 5. لبس الثوب الجديد</button>
+        <button class="dua-option-btn" onclick="openSubSection('subSit6')"><i class="fa-solid fa-bath"></i> 6. دخول الحمام والخروج منه</button>
+        <button class="dua-option-btn" onclick="openSubSection('subSit7')"><i class="fa-solid fa-utensils"></i> 7. الطعام والشراب</button>
+        <button class="dua-option-btn" onclick="openSubSection('subSit8')"><i class="fa-solid fa-mosque"></i> 8. دخول المسجد والخروج منه</button>
+        <button class="dua-option-btn" onclick="openSubSection('subSit9')"><i class="fa-solid fa-bed-pulse"></i> 9. المرض وزيارة المريض</button>
+        <button class="dua-option-btn" onclick="openSubSection('subSit10')"><i class="fa-solid fa-cloud-showers-heavy"></i> 10. المطر والرعد والريح</button>
+        <button class="dua-option-btn" onclick="openSubSection('subSit11')"><i class="fa-solid fa-child"></i> 11. المولود والذرية</button>
+        <button class="dua-option-btn" onclick="openSubSection('subSit12')"><i class="fa-solid fa-ring"></i> 12. الزواج والخطبة</button>
+        <button class="dua-option-btn" onclick="openSubSection('subSit13')"><i class="fa-solid fa-shield-heart"></i> 13. الوساوس والخواطر</button>
+        <button class="dua-option-btn" onclick="openSubSection('subSit14')"><i class="fa-solid fa-hands-praying"></i> 14. الموت والتعزية والقبور</button>
+        <button class="dua-option-btn" onclick="openSubSection('subSit15')"><i class="fa-solid fa-people-arrows"></i> 15. الدعاء للوالدين والأبناء</button>
+        <button class="dua-option-btn" onclick="openSubSection('subSit16')"><i class="fa-solid fa-compass"></i> 16. صلاة الاستخارة</button>
+        <button class="dua-option-btn" onclick="openSubSection('subSit17')"><i class="fa-solid fa-face-smile"></i> 17. الفرح والشكر والنعمة</button>
+        <button class="dua-option-btn" onclick="openSubSection('subSit18')"><i class="fa-solid fa-shield"></i> 18. أذكار التحصين</button>
+        <button class="dua-option-btn" onclick="openSubSection('subSit19')"><i class="fa-solid fa-book-open"></i> 19. أدعية جامعة</button>
+        <button class="dua-option-btn" onclick="openSubSection('subSit20')"><i class="fa-solid fa-moon"></i> 20. رمضان وليلة القدر</button>
+        <button class="dua-option-btn" onclick="openSubSection('subSit21')"><i class="fa-solid fa-kaaba"></i> 21. الحج والعمرة</button>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subSit1">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">الدراسة وطلب العلم</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">أ) عند طلب زيادة العلم</div>
+        <div class="dua-item-text">﴿وَقُلْ رَبِّ زِدْنِي عِلْمًا﴾</div>
+        <div class="dua-item-source">📖 سورة طه: ١١٤ | المصدر: القرآن الكريم.</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفائدة: دعاء قرآني صريح بطلب الزيادة في العلم، ولذلك فهو من أجمل ما يدعو به طالب العلم.</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">ب) طلب العلم النافع</div>
+        <div class="dua-item-text">اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَأَعُوذُ بِكَ مِنْ عِلْمٍ لَا يَنْفَعُ.</div>
+        <div class="dua-item-source">📚 رواه ابن ماجه (٣٨٤٣)، والنسائي في السنن الكبرى.</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفائدة: سؤال الله العلم الذي ينفع صاحبه في دينه ودنياه، والاستعاذة من العلم الذي لا ثمرة له.</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">ج) عند صعوبة الأمر أو الحاجة إلى التيسير</div>
+        <div class="dua-item-text">﴿رَبِّ اشْرَحْ لِي صَدْرِي ۝ وَيَسِّرْ لِي أَمْرِي ۝ وَاحْلُلْ عُقْدَةً مِنْ لِسَانِي ۝ يَفْقَهُوا قَوْلِي﴾</div>
+        <div class="dua-item-source">📖 سورة طه: ٢٥–٢٨ (من دعاء موسى عليه السلام).</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفائدة: طلب شرح الصدر والتيسير وحسن البيان والفهم.</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subSit2">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">السفر والركوب والرجوع</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">عند ركوب وسيلة السفر</div>
+        <div class="dua-item-text">اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ،<br>سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ، وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ.<br>اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى، وَمِنَ الْعَمَلِ مَا تَرْضَى.<br>اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرِنَا هَذَا، وَاطْوِ عَنَّا بُعْدَهُ.<br>اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ، وَالْخَلِيفَةُ فِي الْأَهْلِ.<br>اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ، وَكَآبَةِ الْمَنْظَرِ، وَسُوءِ الْمُنْقَلَبِ فِي الْمَالِ وَالْأَهْلِ.</div>
+        <div class="dua-item-source">📚 صحيح مسلم (١٣٤٢)</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفضل: يجمع دعاء السفر بين التوحيد، وطلب البر والتقوى، وتيسير السفر، وحفظ الأهل، والاستعاذة من مشاق السفر وسوء العاقبة.</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">عند الرجوع من السفر</div>
+        <div class="dua-item-text">آيِبُونَ، تَائِبُونَ، عَابِدُونَ، لِرَبِّنَا حَامِدُونَ.</div>
+        <div class="dua-item-source">📚 صحيح مسلم (١٣٤٢).</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subSit3">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">ركوب السيارة</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">حكم وتوجيه</div>
+        <div class="dua-item-text">لا يوجد دعاء خاص بالسيارة نفسها ثابت عن النبي ﷺ؛ وإنما السيارة تدخل في وسائل الركوب.<br>لذلك عند ركوب السيارة تقول دعاء الركوب السابق، ويبدأ بـ:<br><strong>سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ...</strong></div>
+        <div class="dua-item-source">📖 أصله من سورة الزخرف: ١٣–١٤، وجاء في السنة استعماله في دعاء السفر.</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفائدة: استشعار نعمة الله وتسخيره وسائل الركوب، وسؤال الله السلامة والتيسير.</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subSit4">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">دخول البيت والخروج منه</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">عند دخول البيت</div>
+        <div class="dua-item-text">بِسْمِ اللَّهِ وَلَجْنَا، وَبِسْمِ اللَّهِ خَرَجْنَا، وَعَلَى رَبِّنَا تَوَكَّلْنَا.<br>ثم تقول:<br>السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ.</div>
+        <div class="dua-item-source">📚 سنن أبي داود، وصحيح مسلم (٢٠١٨).</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفضل: حفظ البيت من مبيت الشيطان وطعامه لمن سمّى الله عند دخوله وطعامه.</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">عند الخروج من البيت</div>
+        <div class="dua-item-text">بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ.</div>
+        <div class="dua-item-source">📚 أبو داود (٥٠٩٥)، والترمذي (٣٤٢٦).</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفضل: يُقال لمن قاله: «هُدِيتَ وَكُفِيتَ وَوُقِيتَ»، ويتنحى عنه الشيطان.</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subSit5">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">لبس الثوب الجديد</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">دعاء لبس الثوب</div>
+        <div class="dua-item-text">اللَّهُمَّ لَكَ الْحَمْدُ، أَنْتَ كَسَوْتَنِيهِ، أَسْأَلُكَ مِنْ خَيْرِهِ وَخَيْرِ مَا صُنِعَ لَهُ، وَأَعُوذُ بِكَ مِنْ شَرِّهِ وَشَرِّ مَا صُنِعَ لَهُ.</div>
+        <div class="dua-item-source">📚 أبو داود (٤٠٢٠)، والترمذي (١٧٦٧).</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفائدة: حمد الله على نعمة اللباس، وسؤال خيره والاستعاذة من شره.</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">إذا رأيت شخصًا يلبس ثوبًا جديدًا</div>
+        <div class="dua-item-text">تُبْلِي وَيُخْلِفُ اللَّهُ تَعَالَى.</div>
+        <div class="dua-item-source">📚 أبو داود (٤٠٢٠)، وحسنه أهل العلم.</div>
+    </div>
+</div>
+<div class="section-card sub-section" id="subSit6">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">دخول الحمام والخروج منه</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">عند الدخول</div>
+        <div class="dua-item-text">اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ.</div>
+        <div class="dua-item-source">📚 صحيح البخاري (١٤٢، ٦٣٢٢)، وصحيح مسلم.</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفائدة: الاستعاذة بالله من الشياطين.</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">عند الخروج</div>
+        <div class="dua-item-text">غُفْرَانَكَ.</div>
+        <div class="dua-item-source">📚 أبو داود (٣٠)، والترمذي (٧).</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفائدة: الاستغفار بعد الخروج.</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subSit7">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">الطعام والشراب</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">قبل الطعام</div>
+        <div class="dua-item-text">بِسْمِ اللَّهِ.<br><small style="color:var(--rose-accent); display:block; margin-top:6px;">وإن نسي التسمية في أول الطعام يقول: بِسْمِ اللَّهِ فِي أَوَّلِهِ وَآخِرِهِ.</small></div>
+        <div class="dua-item-source">📚 أبو داود (٣٧٦٧)، والترمذي (١٨٥٩).</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">بعد الطعام</div>
+        <div class="dua-item-text">الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا، وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ.</div>
+        <div class="dua-item-source">📚 أبو داود (٤٠٢٣)، والترمذي (٣٤٥٨).</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفضل: ورد في الحديث أن من قالها غُفِر له ما تقدم من ذنبه.</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subSit8">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">دخول المسجد والخروج منه</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">عند الدخول</div>
+        <div class="dua-item-text">اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ.</div>
+        <div class="dua-item-source">📚 صحيح مسلم (٧١٣).</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">عند الخروج</div>
+        <div class="dua-item-text">اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ.</div>
+        <div class="dua-item-source">📚 صحيح مسلم (٧١٣).</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفائدة: سؤال الله رحمته عند الدخول، وفضله عند الخروج.</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subSit9">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">المرض وزيارة المريض</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">دعاء المريض لنفسه</div>
+        <div class="dua-item-text">اللَّهُمَّ رَبَّ النَّاسِ، أَذْهِبِ الْبَأْسَ، اشْفِ أَنْتَ الشَّافِي، لَا شِفَاءَ إِلَّا شِفَاؤُكَ، شِفَاءً لَا يُغَادِرُ سَقَمًا.</div>
+        <div class="dua-item-source">📚 صحيح البخاري (٥٦٧٥)، وصحيح مسلم (٢١٩١).</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفائدة: من أعظم أدعية طلب الشفاء، وفيه إقرار بأن الشفاء الحقيقي من الله.</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">ومن الدعاء للمريض</div>
+        <div class="dua-item-text">لَا بَأْسَ، طَهُورٌ إِنْ شَاءَ اللَّهُ.</div>
+        <div class="dua-item-source">📚 صحيح البخاري (٥٦٥٦).</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">عند زيارة المريض (تقال ٧ مرات)</div>
+        <div class="dua-item-text">أَسْأَلُ اللَّهَ الْعَظِيمَ، رَبَّ الْعَرْشِ الْعَظِيمِ، أَنْ يَشْفِيَكَ.</div>
+        <div class="dua-item-source">📚 أبو داود (٣١٠٦)، والترمذي (٢٠٨٣).</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفضل: ورد في الحديث فضل عظيم لهذا الدعاء للمريض.</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subSit10">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">المطر والرعد والريح</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">عند نزول المطر</div>
+        <div class="dua-item-text">اللَّهُمَّ صَيِّبًا نَافِعًا.</div>
+        <div class="dua-item-source">📚 صحيح البخاري.</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">عند شدة المطر</div>
+        <div class="dua-item-text">اللَّهُمَّ حَوَالَيْنَا وَلَا عَلَيْنَا، اللَّهُمَّ عَلَى الْآكَامِ وَالظِّرَابِ، وَبُطُونِ الْأَوْدِيَةِ، وَمَنَابِتِ الشَّجَرِ.</div>
+        <div class="dua-item-source">📚 صحيح البخاري (١٠١٤)، وصحيح مسلم (٨٩٧).</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">عند هبوب الريح</div>
+        <div class="dua-item-text">اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهَا، وَخَيْرَ مَا فِيهَا، وَخَيْرَ مَا أُرْسِلَتْ بِهِ، وَأَعُوذُ بِكَ مِنْ شَرِّهَا، وَشَرِّ مَا فِيهَا، وَشَرِّ مَا أُرْسِلَتْ بِهِ.</div>
+        <div class="dua-item-source">📚 صحيح مسلم (٨٩٩).</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفائدة: عدم سب الريح، بل سؤال الله خيرها والاستعاذة من شرها.</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">عند سماع الرعد</div>
+        <div class="dua-item-text">لا يثبت عن النبي ﷺ ذكر مرفوع صحيح مخصوص بالرعد، ولذلك لا يُنسب إليه صيغة معينة.</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subSit11">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">المولود والذرية</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">طلب الذرية الصالحة</div>
+        <div class="dua-item-text">﴿رَبِّ هَبْ لِي مِنْ لَدُنْكَ ذُرِّيَّةً طَيِّبَةً، إِنَّكَ سَمِيعُ الدُّعَاءِ﴾</div>
+        <div class="dua-item-source">📖 سورة آل عمران: ٣٨</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">الدعاء بصلاح الأبناء</div>
+        <div class="dua-item-text">﴿رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِنْ ذُرِّيَّتِي، رَبَّنَا وَتَقَبَّلْ دُعَاءِ﴾</div>
+        <div class="dua-item-source">📖 سورة إبراهيم: ٤٠</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">الدعاء بأن يكون الأبناء قرة عين</div>
+        <div class="dua-item-text">﴿رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ، وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا﴾</div>
+        <div class="dua-item-source">📖 سورة الفرقان: ٧٤</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفائدة: سؤال الله الذرية الصالحة، وإصلاحها، وجعلها سببًا لقرة العين.<br><em style="color:var(--rose-accent);">تنبيه: عبارات التهنئة المشهورة مثل «بُورِكَ لَكَ فِي الْمَوْهُوبِ...» ليست حديثًا صحيحًا مرفوعًا فلا تُنسب للسنة.</em></div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subSit12">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">الزواج والخطبة</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">تهنئة المتزوج</div>
+        <div class="dua-item-text">بَارَكَ اللَّهُ لَكَ، وَبَارَكَ عَلَيْكَ، وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ.</div>
+        <div class="dua-item-source">📚 أبو داود (٢١٣٠)، والترمذي (١٠٩١) وقال: حسن صحيح.</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفائدة: الدعاء بالبركة في الزواج والاجتماع على الخير.<br><em>ملاحظة: لا يوجد دعاء مخصوص ثابت للخطبة نفسها، ومن أراد الزواج فلجأ إلى الاستخارة.</em></div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subSit13">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">الوساوس والخواطر</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">علاج الوسواس</div>
+        <div class="dua-item-text">آمَنْتُ بِاللَّهِ.<br><small style="color:var(--rose-accent); display:block; margin-top:6px;">وقد قال النبي ﷺ في علاج الوسواس: «فَلْيَسْتَعِذْ بِاللَّهِ وَلْيَنْتَهِ».</small></div>
+        <div class="dua-item-source">📚 صحيح مسلم (١٣٤).</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفائدة: عدم الاسترسال مع الوسواس، واللجوء إلى الله بقطعها بالاستعاذة (أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ).</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subSit14">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">الموت والتعزية والقبور</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">عند المصيبة والموت</div>
+        <div class="dua-item-text">إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ.<br>اللَّهُمَّ أْجُرْنِي فِي مُصِيبَتِي، وَأَخْلِفْ لِي خَيْرًا مِنْهَا.</div>
+        <div class="dua-item-source">📚 صحيح مسلم (٩١٨).</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">زيارة المقابر</div>
+        <div class="dua-item-text">السَّلَامُ عَلَيْكُمْ دَارَ قَوْمٍ مُؤْمِنِينَ، وَإِنَّا إِنْ شَاءَ اللَّهُ بِكُمْ لَاحِقُونَ.<br>اللَّهُمَّ اغْفِرْ لِأَهْلِ بَقِيعِ الْغَرْقَدِ.</div>
+        <div class="dua-item-source">📚 صحيح مسلم (٢٤٩).</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">تعزية أهل الميت</div>
+        <div 
+        
+
+
+  class="dua-item-text">إِنَّ لِلَّهِ مَا أَخَذَ، وَلَهُ مَا أَعْطَى، وَكُلُّ شَيْءٍ عِنْدَهُ بِأَجَلٍ مُسَمًّى، فَلْتَصْبِرْ وَلْتَحْتَسِبْ.</div>
+        <div class="dua-item-source">📚 صحيح البخاري (١٢٨٤)، وصحيح مسلم (٩٢٣).</div>
+    </div>
+</div>
+  <div class="section-card sub-section" id="subSit15">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">الدعاء للوالدين والأبناء</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">للوالدين</div>
+        <div class="dua-item-text">﴿رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا﴾<br>﴿رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ﴾</div>
+        <div class="dua-item-source">📖 الإسراء: ٢٤، إبراهيم: ٤١</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">للأبناء والذرية</div>
+        <div class="dua-item-text">﴿رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِنْ ذُرِّيَّتِي، رَبَّنَا وَتَقَبَّلْ دُعَاءِ﴾<br>﴿رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ، وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا﴾</div>
+        <div class="dua-item-source">📖 إبراهيم: ٤٠، الفرقان: ٧٤</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subSit16">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">صلاة الاستخارة ودعاؤها</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">كيف تُصلّى؟</div>
+        <div class="dua-item-text">1. تتوضأ.<br>2. تصلي ركعتين من غير الفريضة.<br>3. بعد السلام تدعو بالدعاء الشريف الآتي:</div>
+        <div class="dua-item-source">📚 صحيح البخاري (٦٣٨٢).</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">دعاء الاستخارة</div>
+        <div class="dua-item-text">اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ، وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ، وَأَسْأَلُكَ مِنْ فَضْلِكَ الْعَظِيمِ؛ فَإِنَّكَ تَقْدِرُ وَلَا أَقْدِرُ، وَتَعْلَمُ وَلَا أَعْلَمُ، وَأَنْتَ عَلَّامُ الْغُيُوبِ.<br>اللَّهُمَّ إِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ (اذكر حاجتك) خَيْرٌ لِي فِي دِينِي، وَمَعَاشِي، وَعَاقِبَةِ أَمْرِي، فَاقْدُرْهُ لِي، وَيَسِّرْهُ لِي، ثُمَّ بَارِكْ لِي فِيهِ.<br>وَإِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ شَرٌّ لِي فِي دِينِي، وَمَعَاشِي، وَعَاقِبَةِ أَمْرِي، فَاصْرِفْهُ عَنِّي، وَاصْرِفْنِي عَنْهُ، وَاقْدُرْ لِيَ الْخَيْرَ حَيْثُ كَانَ، ثُمَّ أَرْضِنِي بِهِ.</div>
+        <div class="dua-item-source">📚 صحيح البخاري.</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">تنبيه: ليس شرطًا رؤية حلم أو رؤيا، بل تمضي في أمرك مع الأخذ بالأسباب والطمأنينة.</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subSit17">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">الفرح والشكر والنعمة</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">من أعظم ما يقال عند النعمة</div>
+        <div class="dua-item-text">الْحَمْدُ لِلَّهِ.<br>﴿لَئِنْ شَكَرْتُمْ لَأَزِيدَنَّكُمْ﴾<br>اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ، وَشُكْرِكَ، وَحُسْنِ عِبَادَتِكَ.</div>
+        <div class="dua-item-source">📖 إبراهيم: ٧ | 📚 أبو داود (١٥٢٢).</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفائدة: طلب الإعانة على شكر نعمه بالقلب واللسان والجوارح.</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subSit18">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">أذكار التحصين</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">آية الكرسي والمعوذات</div>
+        <div class="dua-item-text">﴿اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ...﴾ (آية الكرسي)<br>وتقرأ سورة الإخلاص والمعوذتين ثلاث مرات صباحًا ومساءً.</div>
+        <div class="dua-item-source">📖 البقرة: ٢٥٥</div>
+    </div>
+
+    <div class="dua-item-card">
+        <div class="dua-item-title">دعاء التحصين العظيم</div>
+        <div class="dua-item-text">أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ.<br>بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ، وَهُوَ السَّمِيعُ الْعَلِيمُ (ثلاث مرات).</div>
+        <div class="dua-item-source">📚 صحيح مسلم (٢٧٠٨) | أبو داود (٥٠٨٨).</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفضل: من قالهما لم يضره شيء في ذلك اليوم أو تلك الليلة.</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subSit19">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">أدعية جامعة من القرآن والسنة</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">جامع الدنيا والآخرة</div>
+        <div class="dua-item-text">﴿رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً، وَفِي الْآخِرَةِ حَسَنَةً، وَقِنَا عَذَابَ النَّارِ﴾<br>﴿رَبَّنَا ظَلَمْنَا أَنْفُسَنَا، وَإِنْ لَمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ﴾<br>اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ، فَاعْفُ عَنِّي.</div>
+        <div class="dua-item-source">📖 البقرة: ٢٠١، الأعراف: ٢٣ | 📚 الترمذي (٣٥١٣).</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subSit20">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">رمضان وليلة القدر</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">دعاء ليلة القدر الأعظم</div>
+        <div class="dua-item-text">اللَّهُمَّ إِنَّكَ عَفُوٌّ، تُحِبُّ الْعَفْوَ، فَاعْفُ عَنِّي.</div>
+        <div class="dua-item-source">📚 الترمذي (٣٥١٣).</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفضل: هو الدعاء الذي علّمه النبي ﷺ لعائشة رضي الله عنها حين سألته عن دعاء ليلة القدر.</div>
+    </div>
+</div>
+
+<div class="section-card sub-section" id="subSit21">
+    <button class="back-btn" onclick="openSubSection('situationSection')"><i class="fa-solid fa-arrow-right"></i> عودة للأقسام</button>
+    <div class="sub-title">الحج والعمرة</div>
+    
+    <div class="dua-item-card">
+        <div class="dua-item-title">التلبية النبوية</div>
+        <div class="dua-item-text">لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ.</div>
+        <div class="dua-item-source">📚 صحيح البخاري وصحيح مسلم.</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">الفضل: التلبية إعلان للتوحيد، ويُسن رفع الصوت بها للرجال.<br><em>ملاحظة: ليس لكل شوط في الطواف دعاء مخصوص ثابت، بل يدعو المسلم بما أحب.</em></div>
+    </div>
+</div>
+
+    <div class="section-card sub-section" id="searchSection">
+        <button class="back-btn" onclick="backToMain()"><i class="fa-solid fa-arrow-right"></i> عودة للأبواب</button>
+        <div class="sub-title">ابحث عن دعاء</div>
+        <div class="search-box">
+            <div class="search-input-wrap">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="duaSearchInput" type="search" autocomplete="off"
+                    placeholder="اكتب كلمة مثل: رزق، صبر، علم، شفاء..."
+                    oninput="searchDuas(this.value)"
+                    onkeydown="if(event.key==='Escape'){this.value='';searchDuas('');}">
+                <button type="button" id="clearDuaSearch" class="clear-search" onclick="clearDuaSearch()" aria-label="مسح البحث">×</button>
+            </div>
+            <div class="search-hints">
+                جرّب: <button type="button" onclick="setSearchKeyword('رزق')">رزق</button>
+                <button type="button" onclick="setSearchKeyword('صبر')">صبر</button>
+                <button type="button" onclick="setSearchKeyword('علم')">علم</button>
+                <button type="button" onclick="setSearchKeyword('شفاء')">شفاء</button>
+                <button type="button" onclick="setSearchKeyword('سفر')">سفر</button>
+                <button type="button" onclick="setSearchKeyword('مغفرة')">مغفرة</button>
+            </div>
+            <div id="searchResultCount" class="search-result-count"></div>
+            <div id="searchResults" class="search-results">
+                <div class="search-empty">اكتب كلمة مفتاحية للعثور على الأدعية المرتبطة بها.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="personal-footer">
+        <p>
+            إنِ اسْتَعَنْتَ بِهَذَا الذِّكْرِ، فَلَا تَنْسَ <b>هديل وَوَالِدَيْهَا</b> مِنْ صَالِحِ دُعَائِكَ 🌿
+        </p>
+    </div>
+
+</div>
+
+<script>
+const quranDuas = [
+    {title:"دعاء جامع لخيري الدنيا والآخرة",text:"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",source:"المصدر: سورة البقرة، الآية 201.",virtue:"من أجمع الأدعية، وقد كان النبي ﷺ يكثر منه.",tag:"⭐ دعاء جامع"},
+    {title:"دعاء طلب العلم",text:"رَبِّ زِدْنِي عِلْمًا",source:"المصدر: سورة طه، الآية 114.",virtue:"دعاء قرآني بطلب الزيادة في العلم.",tag:"⭐ العلم والتعلم"},
+    {title:"دعاء شرح الصدر وتيسير الأمر",text:"رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي",source:"المصدر: سورة طه، الآيتان 25-26.",virtue:"دعاء موسى عليه السلام.",tag:"⭐ التيسير"},
+    {title:"دعاء يونس عليه السلام",text:"لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ",source:"المصدر: سورة الأنبياء، الآية 87.",virtue:"دعاء في الكرب والتوبة واللجوء إلى الله.",tag:"⭐ الكرب والتوبة"}
+];
+  
+function openSubSection(sectionId) {
+    document.querySelectorAll('.sub-section').forEach(sec => sec.classList.remove('active'));
+    const main = document.getElementById('mainDuaSection');
+    const target = document.getElementById(sectionId);
+    if (!target) return;
+    main.style.display = 'none';
+    target.classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function backToMain() {
+    document.querySelectorAll('.sub-section').forEach(sec => sec.classList.remove('active'));
+    const main = document.getElementById('mainDuaSection');
+    main.style.display = 'flex';
+    window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function normalizeArabic(value) {
+    return String(value || '')
+        .toLowerCase()
+        .normalize('NFKD')
+        .replace(/[\u064B-\u065F\u0670]/g, '')
+        .replace(/[إأآٱ]/g, 'ا')
+        .replace(/ى/g, 'ي')
+        .replace(/ة/g, 'ه')
+        .replace(/ؤ/g, 'و')
+        .replace(/ئ/g, 'ي')
+        .replace(/ـ/g, '')
+        .replace(/[^\u0600-\u06FF\u0750-\u077F\u08A0-\u08FFa-z0-9 ]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+// كلمات قريبة تساعد البحث حتى لو لم يكتب المستخدم نفس اللفظ الموجود في الدعاء.
+const duaSearchAliases = {
+    'رزق':['رزق','الرزق','مال','المال','غنى','الغني','بركه','البركه','دين'],
+    'مال':['مال','المال','رزق','رزقي','غنى'],
+    'صبر':['صبر','الصبر','ابتلاء','بلاء','كرب','هم','حزن'],
+    'حزن':['حزن','حزين','هم','غم','كرب','ضيق'],
+    'هم':['هم','غم','كرب','ضيق','حزن'],
+    'كرب':['كرب','هم','غم','ضيق','حزن','بلاء'],
+    'علم':['علم','العلم','تعلم','التعلم','فهم','حفظ'],
+    'دراسة':['دراسه','الدراسه','علم','تعلم','امتحان','نجاح','فهم'],
+    'امتحان':['امتحان','اختبار','دراسه','علم','تيسير','نجاح'],
+    'نجاح':['نجاح','توفيق','تيسير','علم','دراسه'],
+    'شفاء':['شفاء','شافي','مرض','مريض','عافيه','عافية'],
+    'مرض':['مرض','مريض','شفاء','عافيه','عافية'],
+    'مغفرة':['مغفره','مغفرة','غفران','ذنب','ذنوب','توبه','توبة'],
+  'توبة':['توبه','توبة','ذنب','ذنوب','مغفره','مغفرة','استغفار'],
+    'سفر':['سفر','مسافر','ركوب','سياره','السياره','طريق'],
+    'سيارة':['سياره','السياره','ركوب','سفر'],
+    'بيت':['بيت','البيت','منزل','دخول','خروج'],
+    'زواج':['زواج','زوج','زوجة','زوجة','نكاح'],
+    'خوف':['خوف','خائف','امن','أمن','طمأنينه','طمأنينة'],
+    'طمأنينة':['طمأنينه','طمأنينة','سكينه','سكون','خوف','قلب'],
+    'موت':['موت','الميت','وفاه','وفاة','جنازه','جنازة'],
+    'والدين':['والدين','الوالدين','اب','أب','ام','أم','بر'],
+    'أطفال':['طفل','اطفال','أطفال','ولد','ابن','بنت'],
+    'صباح':['صباح','صبح','اذكار الصباح','أذكار الصباح'],
+    'مساء':['مساء','ليل','اذكار المساء','أذكار المساء']
+};
+  
+function getSearchTerms(keyword) {
+    const normalized = normalizeArabic(keyword);
+    if (!normalized) return [];
+    const terms = new Set([normalized]);
+    Object.keys(duaSearchAliases).forEach(key => {
+        const nk = normalizeArabic(key);
+        if (nk === normalized || nk.includes(normalized) || normalized.includes(nk)) {
+            duaSearchAliases[key].forEach(t => terms.add(normalizeArabic(t)));
+        }
+    });
+    return [...terms].filter(Boolean);
+}
+
+function buildDuaSearchIndex() {
+    const cards = [...document.querySelectorAll('.dua-item-card')];
+    const indexed = [];
+    cards.forEach(card => {
+        const title = card.querySelector('.dua-item-title')?.textContent?.trim() || '';
+        const text = card.querySelector('.dua-item-text')?.textContent?.trim() || '';
+        const source = card.querySelector('.dua-item-source')?.textContent?.trim() || '';
+        const extra = [...card.querySelectorAll('div:not(.dua-item-title):not(.dua-item-text):not(.dua-item-source)')]
+            .map(el => el.textContent.trim()).filter(Boolean).join(' ');
+        const parentSection = card.closest('.sub-section');
+        const sectionTitle = parentSection?.querySelector('.sub-title')?.textContent?.trim() || '';
+        const searchable = normalizeArabic([title,text,source,extra,sectionTitle].join(' '));
+        if (title || text) indexed.push({card,title,text,source,sectionTitle,searchable});
+    });
+    return indexed;
+}
+
+let duaSearchIndex = [];
+function searchDuas(keyword) {
+    const input = document.getElementById('duaSearchInput');
+    const results = document.getElementById('searchResults');
+    const count = document.getElementById('searchResultCount');
+    const clear = document.getElementById('clearDuaSearch');
+    if (!results || !count) return;
+    keyword = String(keyword || '').trim();
+    if (input && input.value !== keyword) input.value = keyword;
+    if (clear) clear.style.display = keyword ? 'block' : 'none';
+    if (!keyword) {
+        count.textContent = '';
+        results.innerHTML = '<div class="search-empty">اكتب كلمة مفتاحية للعثور على الأدعية المرتبطة بها.</div>';
+        return;
+    }
+    if (!duaSearchIndex.length) duaSearchIndex = buildDuaSearchIndex();
+    const terms = getSearchTerms(keyword);
+    const matches = duaSearchIndex.map(item => {
+        let score = 0;
+        terms.forEach(term => {
+            if (item.searchable.includes(term)) score += term === normalizeArabic(keyword) ? 3 : 1;
+            if (normalizeArabic(item.title).includes(term)) score += 4;
+            if (normalizeArabic(item.sectionTitle).includes(term)) score += 2;
+        });
+        return {...item,score};
+    }).filter(item => item.score > 0).sort((a,b) => b.score - a.score);
+
+    count.textContent = matches.length ? `وُجد ${matches.length} دعاء/نص مرتبط بـ «${keyword}»` : 'لم نجد دعاءً مطابقًا لهذه الكلمة.';
+    if (!matches.length) {
+        results.innerHTML = '<div class="search-empty">جرّبي كلمة أخرى مثل: رزق، صبر، علم، شفاء، سفر، مغفرة.</div>';
+        return;
+    }
+    results.innerHTML = matches.map(item => {
+        const clone = item.card.cloneNode(true);
+        clone.dataset.searchSection = item.sectionTitle;
+        return clone.outerHTML;
+    }).join('');
+}
+
+function setSearchKeyword(keyword) {
+    const input = document.getElementById('duaSearchInput');
+    if (input) { input.value = keyword; input.focus(); }
+    searchDuas(keyword);
+}
+
+function clearDuaSearch() {
+    const input = document.getElementById('duaSearchInput');
+    if (input) input.value = '';
+    searchDuas('');
+    if (input) input.focus();
+}
+
+function showRandomDua() {
+    const container = document.getElementById('duaContainer');
+    if (!container || !quranDuas.length) return;
+    const dua = quranDuas[Math.floor(Math.random() * quranDuas.length)];
+    container.innerHTML = `<div class="random-dua-name">${dua.title}</div><div class="random-dua-text">${dua.text}</div><div class="random-dua-source">${dua.source}</div><div class="random-dua-virtue">${dua.virtue}</div><div class="random-dua-tag">${dua.tag}</div>`;
+}
+
+let currentFontSize = 1.15;
+let isBold = false;
+function adjustFontSize(direction) {
+    currentFontSize = Math.min(1.45, Math.max(0.95, currentFontSize + direction * 0.08));
+    document.documentElement.style.setProperty('--user-font-size', currentFontSize + 'rem');
+}
+function toggleFontWeight() {
+    isBold = !isBold;
+   document.documentElement.style.setProperty('--user-font-weight', isBold ? 'bold' : 'normal');
+}
+
+
+/* صوت نقر خفيف للأزرار — إضافة فقط دون تغيير شكل أو محتوى المنصة */
+let clickAudioContext;
+function playButtonClickSound() {
+    try {
+        clickAudioContext = clickAudioContext || new (window.AudioContext || window.webkitAudioContext)();
+        if (clickAudioContext.state === 'suspended') clickAudioContext.resume();
+        const osc = clickAudioContext.createOscillator();
+        const gain = clickAudioContext.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(620, clickAudioContext.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(420, clickAudioContext.currentTime + 0.045);
+        gain.gain.setValueAtTime(0.045, clickAudioContext.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, clickAudioContext.currentTime + 0.055);
+        osc.connect(gain);
+        gain.connect(clickAudioContext.destination);
+        osc.start();
+        osc.stop(clickAudioContext.currentTime + 0.055);
+    } catch (e) {}
+}
+
+document.addEventListener('click', function (event) {
+    const button = event.target.closest('button');
+    if (button) playButtonClickSound();
+}, true);
+
+document.addEventListener('DOMContentLoaded', showRandomDua);
+</script>
+
+</body>
+</html>
