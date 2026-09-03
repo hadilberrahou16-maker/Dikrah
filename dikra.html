@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ذِكْرَى - الرئيسية</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <style>
+        :root {
+            --bg-page: #fff9fb;            
+            --card-white: #ffffff;
+            --rose-accent: #d47a94;        
+            --rose-light: #fbebf0;         
+            --border-color: #f3e2e8;       
+            --text-main: #2d2629;          
+            --text-muted: #7d6f73;
+            
+            /* ألوان الأذكار في الورد اليومي */
+            --dhikr-1: #d47a94; /* وردي */
+            --dhikr-2: #4e9f3d; /* بنفسجي */
+            --dhikr-3: #f9bc60; /* أصفر دافئ */
+            
+            --font-authentic: 'Amiri', serif;
+            --font-title: 'Aref Ruqaa', serif;
+            
+            /* متغيرات التحكم في الخط */
+            --user-font-size: 1.15rem;
+            --user-font-weight: normal;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: #f0e6ea;
+            font-family: var(--font-authentic);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 420px;
+            background-color: var(--bg-page);
+            padding: 20px 20px 90px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* شريط التحكم في الخط (إضافي راقي) */
+        .font-controls {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            padding-bottom: 5px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .control-btn {
+            background: var(--card-white);
+            border: 1px solid var(--border-color);
+            color: var(--rose-accent);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .control-btn:hover {
+            background-color: var(--rose-light);
+        }
+
+        /* الهيدر واسم المنصة */
+            header {
+        text-align: center;
+        padding: 22px 15px;
+        background: linear-gradient(135deg, #fff6f9 0%, #ffffff 100%);
+        border: 1px solid #ebd0dc;
+        border-radius: 20px;
+        margin: 12px;
+        box-shadow: 0 10px 25px rgba(212, 122, 148, 0.08), 
+                    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+    
+        .app-title {
+            font-family: var(--font-title);
+            font-size: 3rem;
+            color: var(--rose-accent);
+            margin-bottom: 4px;
+            text-shadow: 0 2px 10px rgba(212, 122, 148, 0.2);
+        }
+
+        .quran-ayah {
+            font-size: var(--user-font-size);
+            font-weight: var(--user-font-weight);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .quran-surah {
+            font-size: 0.85rem;
+            color: var(--rose-accent);
+            display: block;
+            margin-top: 4px;
+        }
+
+        /* كروت الأقسام */
+        .section-card {
+            background-color: var(--card-white);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 18px;
+            box-shadow: 0 6px 15px rgba(232, 165, 184, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            color: var(--rose-accent);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+        }
+ لأذكار ونسب التقدم */
+        ..azkar-item {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 12px;
+    border-bottom: 1px dashed var(--border-color);
+    cursor: pointer;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+
+        .azkar-item:hover {
+            background-color: var(--rose-light);
+            transform: translateX(-3px);
+        }
+
+        .azkar-item:last-child {
+            border-bottom: none;
+        }
+
+        .azkar-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: var(--user-font-size);
+            font-weight: var(--user-font-weight);
+            color: var(--text-main);
+        }
+
+        .azkar-icon {
+            color: var(--rose-accent);
+            font-size: 1.2rem;
+        }
+
+        .progress-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            direction: ltr;
+            font-weight: bold;
+        }
+
+        /* الشبكة السريعة للتسبيح والدعاء */
+        .quick-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .quick-btn {
+            background-color: var(--card-white);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 14px;
+            text-align: center;
+            color: var(--text-main);
+            font-family: var(--font-authentic);
+            font-size: 1.15rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 3px 10px rgba(232, 165, 184, 0.05);
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .quick-btn:hover {
+            background-color: var(--rose-light);
+            border-color: var(--rose-accent);
+            transform: translateY(-2px);
+        }
+
+        .quick-btn i {
+            color: var(--rose-accent);
+        }
+
+        /* تصميم الورد اليومي وحلقة الذكر التفاعلية مع القلب الحقيقي */
+        .daily-wird {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dhikr-ring-container {
+            position: relative;
+            width: 95px;
+            height: 95px;
+            margin: 5px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dhikr-ring {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid var(--border-color);
+            border-top-color: var(--dhikr-1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 0.4s ease, transform 0.2s ease;
+            box-shadow: 0 0 15px rgba(212, 122, 148, 0.15);
+            background: radial-gradient(circle, var(--rose-light) 0%, transparent 70%);
+        }
+
+        .ring-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .dhikr-counter-badge {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: var(--text-muted);
+        }
+
+        .wird-text {
+            font-size: 1.3rem;
+            color: var(--rose-accent);
+            font-weight: bold;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease;
+            text-align: center;
+          }
+     .action-btn {
+            background: transparent;
+            border: 1.5px solid var(--rose-accent);
+            color: var(--rose-accent);
+            padding: 8px 26px;
+            border-radius: 20px;
+            font-family: var(--font-authentic);
+            font-size: 1.05rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(212, 122, 148, 0.1);
+        }
+
+        .action-btn:hover, .action-btn:active {
+            background-color: var(--rose-accent);
+            color: white;
+            transform: scale(1.03);
+        }
+.asma-card {
+    background-color: var(--rose-light, #fdf2f4);
+    border: 1px dashed var(--border-color, #e0b1cb);
+    border-radius: 20px;
+    padding: 25px 20px;
+    margin: 25px auto;
+    text-align: center;
+    max-width: 90%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.asma-card h3 {
+    color: #c5a059; /* لون ذهبي راقي */
+    font-family: 'Amiri', 'Traditional Arabic', serif; /* خط القرآن الكريم */
+    font-size: 32px;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+.asma-card p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+    color: #4a3b4c;
+}
+
+#asmaEvidence {
+    font-size: 14px;
+    color: #7a637c;
+    font-style: italic;
+}
+
+        /* لمسة الإهداء والدعاء */
+    .personal-footer {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    text-align: center;
+    padding: 16px 12px;
+    background-color: var(--rose-light);
+    border-radius: 16px;
+    border: 1px dashed var(--border-color);
+    margin: 20px auto !important;
+    box-sizing: border-box;
+    flex-basis: 100% !important;
+}
+    
+
+        /* الشريط السفلي للتنقل */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 420px;
+            background-color: var(--card-white);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.03);
+            z-index: 1000;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            transition: color 0.2s;
+        }
+
+        .nav-link i {
+            font-size: 1.1rem;
+        }
+
+        .nav-link.active, .nav-link:hover {
+            color: var(--rose-accent);
+            font-weight: bold;
+        }
+        /* إعطاء الإطار المحدد لوناً أعمق وتأثير ثلاثي الأبعاد بارز */
+.card, .azkar-item, div[style*="background"] {
+    background: #fbf1f5 !important;
+    border: 1.5px solid #ebd0dc !important;
+    box-shadow: 0 6px 16px rgba(211, 115, 145, 0.1), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+/* تلوين حواف جميع الأزرار باللون الوردي المتناسق */
+button, .btn, .action-btn {
+    border: 1.5px solid #d47a94 !important;
+}
+    /* إعطاء الأزرار العلوية تدرجاً وردياً جذاباً وحيوياً */
+    .font-controls button, .control-btn, button[class*="btn"] {
+        background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%) !important;
+        border: 1px solid #f48fb1 !important;
+        color: #ad1457 !important;
+        box-shadow: 0 4px 10px rgba(233, 30, 99, 0.15);
+        transition: all 0.3s ease;
+    }
+
+    /* تأثير عند لمس الزر ليكون أكثر حيوية */
+    .font-controls button:active, .control-btn:active {
+        transform: scale(0.95);
+        background: linear-gradient(135deg, #f8bbd0 0%, #f48fb1 100%) !important;
+    }
+
+    
+    ./* تلوين خلفيات بطاقات أذكار الصباح
+والمساء بلون دافئ ومميز */
+.azkar-item, .counter-box {
+    background: #ffffff !important;
+    border: 1px solid rgba(212, 122, 148, 0.2) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 15px rgba(212, 122, 148, 0.05) !important;
+}
+
+}                    
+
+.asmaa-desc {
+    font-size: 1.1rem;
+    color: var(--text-main, #2d2629);
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.asmaa-dua-box {
+    font-size: 0.88rem;
+    color: #475569;
+    font-style: italic;
+    margin-bottom: 16px;
+    background: var(--bg-page, #fff9fb);
+    padding: 12px 16px;
+    border-radius: 16px;
+    border: 1px dashed var(--border-color, #f3e2e    8);
+    line-height: 1.5;
+}
+
+.jamee-btn {
+    background: linear-gradient(135deg, var(--rose-accent, #d47a94), #c26581);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(212, 122, 148, 0.3);
+    cursor: pointer;
+    transition: 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.jamee-btn:active {
+    transform: scale(0.97);
+}
+/* تنسيقات نافذة الدعاء الجامع المنبثقة */
+.jamee-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.jamee-modal-content {
+    background: var(--card-white, #ffffff);
+    border-radius: 24px;
+    padding: 25px;
+    padding-bottom: 35px; /* زيادة المساحة بالأسفل لتفادي الالتصاق */
+    max-width: 500px;
+    max-height: 82vh; /* إعطاء مساحة أوسع للنافذة عمودياً */
+    overflow-y: auto;
+    text-align: right;
+    box-shadow: 0 10px 30px rgba(212, 122, 148, 0.15);
+    border-top: 5px solid var(--rose-accent, #d47a94);
+    position: relative;
+    margin-bottom: 20px; /* تباعد النافذة عن حافة الشاشة السفليّة */
+}
+/* تنسيق الزر الدائري الزجاجي في أسفل النافذة */
+.glass-close-btn {
+    position: sticky;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin: 20px auto 0 auto;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(212, 122, 148, 0.35);
+    color: var(--rose-accent, #d47a94);
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(212, 122, 148, 0.25);
+    transition: all 0.2s ease;
+    z-index: 100;
+}
+
+.glass-close-btn:active {
+    transform: translateX(-50%) scale(0.92);
+    background: #ffffff;
+}
+
+.glass-close-btn:active {
+    transform: scale(0.92);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+    
+    </style>
+ </head>
+<body>
+
+<div class="app-container">
+
+    <!-- أداة التحكم في حجم وخشونة الخط -->
+    <div class="font-controls">
+        <button class="control-btn" onclick="adjustFontSize(1)" title="تكبير الخط"><i class="fa-solid fa-plus"></i></button>
+        <button class="control-btn" onclick="adjustFontSize(-1)" title="تصغير الخط"><i class="fa-solid fa-minus"></i></button>
+        <button class="control-btn" onclick="toggleFontWeight()" title="تغيير خشونّة الخط"><i class="fa-solid fa-bold"></i></button>
+    </div>
+
+    <!-- الهيدر والآية -->
+    <header>
+        <div class="app-title">ذِكْرَى</div>
+        <div class="quran-ayah">﴿وَذَكِّرْ فَإِنَّ الذِّكْرَىٰ تَنفَعُ الْمُؤْمِنِينَ﴾</div>
+        <span class="quran-surah">[سورة الذاريات: 55]</span>
+    </header>
+
+    <!-- قسم أذكارك اليوم -->
+   
+<div class="section-card">
+        <div class="section-title">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <span>أذكارك اليوم</span>
+        </div>    
+        
+<!-- أذكار الصباح -->
+<div class="azkar-item" onclick="window.location.href='Sabah.html'" style="display: flex; align-items: center; justify-content: space-between; padding: 12px;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-sun azkar-icon"></i>
+        <span>أذكار الصباح</span>
+    </div>
+    <div style="direction: ltr; font-weight: bold;"></div>
+</div>
+
+<!-- أذكار المساء -->
+<div class="azkar-item" onclick="window.location.href='masaa.html'" style="display: flex; align-items: center; justify-content: space-between; padding: 12px;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-moon azkar-icon"></i>
+        <span>أذكار المساء</span>
+    </div>
+    <div style="direction: ltr; font-weight: bold;"></div>
+        
+        </div>
+    </div>
+
+    <!-- شبكة التسبيح والدعاء -->
+    <div class="quick-grid">
+        <a href="doaa.html" class="quick-btn">
+            <i class="fa-solid fa-hands-praying"></i>
+            <span>الدعاء</span>
+        </a>
+        <a href="mesbahati.html" class="quick-btn">
+            <i class="fa-solid fa-circle-notch"></i>
+            <span>التسبيح</span>
+        </a>
+    </div>
+
+    <!-- كارت الورد اليومي مع حلقة الذكر التفاعلية والقلب الحقيقي -->
+    <div class="section-card daily-wird">
+        <div class="section-title" style="justify-content: center; width: 100%;">
+            <i class="fa-solid fa-sparkles"></i>
+            <span>وردك اليومي</span>
+        </div>
+        
+        <!-- حلقة الذكر والقلب الحقيقي وعداد التبجيل (3 مرات لكل ذكر) -->
+        <div class="dhikr-ring-container">
+            <div class="dhikr-ring" id="dhikrRing">
+                <div class="ring-content">
+             <span id="heartIcon" style="
+                color: var(--dhikr-1); 
+                font-size: 1.4rem; 
+                position: relative; 
+                top: -1px;
+                text-shadow: 0 2px 8px rgba(212, 122, 148, 0.3); /* إضافة ظل خفيف وناعم للأيقونة */
+            ">
+                <i class="fas fa-heartbeat"></i> <!-- أيقونة قلب تخطيطي احترافية -->
+            </span>                  
+                    <span class="dhikr-counter-badge" id="subCount">1/3</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="wird-text" id="wirdText">"لَا إِلَهَ إِلَّا اللَّهُ"</div>
+        <button class="action-btn" id="wirdBtn" onclick="countDhikr()">سبّح</button>
+    </div>
+  
+<!-- بطاقة أسماء الله الحسنى -->
+<div class="asma-card">
+    <h3 id="asmaName">اسم الله</h3>
+    <p id="asmaMeaning">معنى الاسم سيظهر هنا...</p>
+    <p id="asmaEvidence">الدليل من القرآن أو السنة...</p>
+</div>
+    
+    <!-- عبارات الدعاء والإهداء الشخصية -->
+    <div class="personal-footer">
+        <p>
+ إن استَعَنتَ بِهذَا الذّكْرِ، فلا تَنْسَ <b>هديل</b> 🌷 وَوَالِدَيْهَا <b>مِن صالح دُعَائِك</b> 🌿
+        </p>
+    </div>
+
+           
+
+<!-- الشريط السفلي -->
+<div class="bottom-nav">
+    <a href="dikra.html" class="nav-link active">
+        <i class="fa-solid fa-house"></i>
+        <span>الرئيسية</span>
+    </a>
+    <a href="sabah.html" class="nav-link">
+        <i class="fa-solid fa-book-open"></i>
+        <span>الأذكار</span>
+    </a>
+    <a href="doaa.html" class="nav-link">
+        <i class="fa-solid fa-hands-praying"></i>
+        <span>الأدعية</span>
+    </a>
+    <a href="#" class="nav-link">
+        <i class="fa-solid fa-gear"></i>
+        <span>الإعدادات</span>
+    </a>
+</div>
+
+<script>
+    // أذكار الورد اليومي مع ألوانها المستقلة
+    const dhikrSteps = [
+        { text: '"لَا إِلَهَ إِلَّا اللَّهُ"', color: 'var(--dhikr-1)' },
+        { text: '"اللَّهُ أَكْبَرُ"', color: 'var(--dhikr-2)' },
+        { text: '"لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ"', color: 'var(--dhikr-3)' }
+    ];
+
+    let currentStep = 0;
+    let subCurrent = 1; // يبدأ من 1 إلى غاية 3 لكل ذكر
+    const targetSub = 3;
+    let isFinished = false;
+
+    function countDhikr() {
+        const wirdText = document.getElementById('wirdText');
+        const wirdBtn = document.getElementById('wirdBtn');
+        const dhikrRing = document.getElementById('dhikrRing');
+        const heartIcon = document.getElementById('heartIcon');
+        const subCount = document.getElementById('subCount');
+
+        if (isFinished) {
+            // إعادة التسبيح من البداية
+            currentStep = 0;
+            subCurrent = 1;
+            isFinished = false;
+            wirdText.style.fontSize = "1.3rem";
+            wirdText.innerHTML = dhikrSteps[currentStep].text;
+            wirdBtn.textContent = "سبّح";
+            dhikrRing.style.borderTopColor = dhikrSteps[currentStep].color;
+            heartIcon.style.color = dhikrSteps[currentStep].color;
+            heartIcon.style.display = "block";
+            subCount.style.display = "block";
+            subCount.textContent = `${subCurrent}/${targetSub}`;
+            return;
+        }
+
+                if (subCurrent < targetSub) {
+            subCurrent++;
+            subCount.textContent = `${subCurrent}/${targetSub}`;
+            // جعل الخط المحيط بالدائرة يتفاعل ويأخذ لون الذكر الحالي تدريجياً
+   wirdText.style.color = dhikrSteps[currentStep].color;
+   
+            dhikrRing.style.borderTopColor = dhikrSteps[currentStep].color;
+        } else {
+            subCurrent = 1;
+            currentStep++;
+            if (currentStep < dhikrSteps.length) {
+                wirdText.innerHTML = dhikrSteps[currentStep].text;
+                dhikrRing.style.borderTopColor = dhikrSteps[currentStep].color;
+                heartIcon.style.color = dhikrSteps[currentStep].color;
+                subCount.textContent = subCurrent + '/3';
+                wirdText.style.color = "var(--rose-accent)";
+                
+            } else {
+                    
+                // انتهاء الورد كاملاً
+                isFinished = true;
+                wirdText.innerHTML = "<div style='text-align:center;'>تم بحمد الله<br><span style='font-size:0.85rem; color:var(--text-muted); font-weight:normal;'>أعد التسبيح</span></div>";
+                wirdText.style.fontSize = "1.05rem";
+                wirdBtn.textContent = "إعادة";
+                dhikrRing.style.borderTopColor = "var(--rose-accent)";
+                heartIcon.style.display = "none";
+                subCount.style.display = "none";
+            }
+        }
+    }
+    
+    // وظائف التحكم في الخط
+    let currentFontSize = 1.15;
+    function adjustFontSize(direction) {
+        currentFontSize += direction * 0.08;
+        if (currentFontSize < 0.95) currentFontSize = 0.95;
+        if (currentFontSize > 1.45) currentFontSize = 1.45;
+        document.documentElement.style.setProperty('--user-font-size', currentFontSize + 'rem');
+    }
+
+    let isBold = false;
+    function toggleFontWeight() {
+        isBold = !isBold;
+        let weight = isBold ? 'bold' : 'normal';
+        document.documentElement.style.setProperty('--user-font-weight', weight);
+    }
+
+    // تفاعل أذكار الصباح والمساء
+    function toggleProgress(element, total) {
+        const progressText = element.querySelector('.progress-text');
+        let current = parseInt(progressText.textContent.split(' / ')[0]);
+        
+        if (current < total) {
+            current++;
+            progressText.textContent = `${current} / ${total}`;
+            if (current === total) {
+                element.style.backgroundColor = 'var(--rose-light)';
+            }
+        } else {
+            current = 0;
+            progressText.textContent = `${current} / ${total}`;
+            element.style.backgroundColor = 'transparent';
+        }
+    }
+// قائمة أسماء الله الحسنى - المجموعة الأولى (1 إلى 30)
+const asmaaAllahGroup1 = [
+    {
+        name: "الله",
+        meaning: "الاسم الجامع لجميع معاني الألوهية والكمال، وهو المعبود بحق، المتصف بجميع صفات الكمال.",
+        evidence: "﴿اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ﴾ [البقرة: 255]"
+    },
+    {
+        name: "الرحمن",
+        meaning: "ذو الرحمة الواسعة التي وسعت جميع الخلق، وهي صفة ثابتة لله تعالى على الوجه اللائق بجلاله.",
+        evidence: "﴿الرَّحْمَٰنُ عَلَى الْعَرْشِ اسْتَوَىٰ﴾ [طه: 5]"
+    },
+    {
+        name: "الرحيم",
+        meaning: "كثير الرحمة، ومن رحمته الخاصة بالمؤمنين أن هداهم للإيمان وأكرمهم في الدنيا والآخرة.",
+        evidence: "﴿وَكَانَ بِالْمُؤْمِنِينَ رَحِيمًا﴾ [الأحزاب: 43]"
+    },
+    {
+        name: "الملك",
+        meaning: "المالك لجميع الموجودات، المتصرف فيها بأمره وحكمه، وله الملك المطلق.",
+        evidence: "﴿فَتَعَالَى اللَّهُ الْمَلِكُ الْحَقُّ﴾ [طه: 114]"
+    },
+    {
+        name: "الأحد",
+        meaning: "المتفرد بالوحدانية، الذي لا مثيل له ولا شريك، ولا يشاركه أحد في شيء من خصائصه.",
+        evidence: "﴿قُلْ هُوَ اللَّهُ أَحَدٌ﴾ [الإخلاص: 1]"
+    },
+    {
+        name: "الأعلى",
+        meaning: "العالي فوق خلقه، وله علو الذات وعلو القدر وعلو القهر، وهو المتصف بكل معاني العلو والكمال.",
+        evidence: "﴿سَبِّحِ اسْمَ رَبِّكَ الْأَعْلَى﴾ [الأعلى: 1]"
+    },
+    {
+        name: "الأكرم",
+        meaning: "الأكثر كرمًا وجودًا وإحسانًا، الذي لا يوازي كرمه كرم أحد من خلقه.",
+        evidence: "﴿اقْرَأْ وَرَبُّكَ الْأَكْرَمُ﴾ [العلق: 3]"
+    },
+    {
+        name: "الإله",
+        meaning: "المعبود بحق، فلا يستحق العبادة أحد سواه.",
+        evidence: "﴿وَإِلَٰهُكُمْ إِلَٰهٌ وَاحِدٌ لَا إِلَٰهَ إِلَّا هُوَ الرَّحْمَٰنُ الرَّحِيمُ﴾ [البقرة: 163]"
+    },
+    {
+        name: "الأول",
+        meaning: "الذي ليس قبله شيء، فهو سبحانه سابق لكل موجود.",
+        evidence: "قال النبي ﷺ: «اللهم أنت الأول فليس قبلك شيء...» [صحيح مسلم]"
+    },
+    {
+        name: "الآخر",
+        meaning: "الذي ليس بعده شيء، فهو الباقي بعد فناء جميع خلقه.",
+        evidence: "﴿هُوَ الْأَوَّلُ وَالْآخِرُ﴾ [الحديد: 3]"
+    },
+    {
+        name: "الظاهر",
+        meaning: "العالي فوق كل شيء، وليس فوقه شيء، وهو الظاهر بآياته ودلائل قدرته.",
+        evidence: "﴿وَالظَّاهِرُ وَالْبَاطِنُ﴾ [الحديد: 3]"
+    },
+    {
+        name: "الباطن",
+        meaning: "المحيط بكل شيء علمًا، والقريب من عباده بعلمه وإحاطته، وليس دونه شيء.",
+        evidence: "﴿وَالظَّاهِرُ وَالْبَاطِنُ﴾ [الحديد: 3]"
+    },
+    {
+        name: "البارئ",
+        meaning: "الذي خلق الخلق وأوجدهم على ما اقتضته حكمته وتقديره.",
+        evidence: "﴿هُوَ اللَّهُ الْخَالِقُ الْبَارِئُ الْمُصَوِّرُ﴾ [الحشر: 24]"
+    },
+    {
+        name: "البر",
+        meaning: "كثير الخير والإحسان، الواسع في عطائه ورحمته، المحسن إلى عباده.",
+        evidence: "﴿إِنَّهُ هُوَ الْبَرُّ الرَّحِيمُ﴾ [الطور: 28]"
+    },
+    {
+        name: "البصير",
+        meaning: "الذي يرى جميع الأشياء، فلا يخفى عليه شيء في الأرض ولا في السماء.",
+        evidence: "﴿إِنَّ اللَّهَ كَانَ سَمِيعًا بَصِيرًا﴾ [النساء: 58]"
+    },
+    {
+        name: "التواب",
+        meaning: "كثير التوبة على عباده، يوفقهم للتوبة ثم يقبلها منهم ويغفر ذنوبهم.",
+        evidence: "﴿إِنَّ اللَّهَ هُوَ التَّوَّابُ الرَّحِيمُ﴾ [الحجرات: 12]"
+    },
+    {
+        name: "الجبار",
+        meaning: "العالي القاهر، والذي يجبر كسر عباده الضعفاء ويصلح أحوالهم، وهو المتعالي عن كل نقص.",
+        evidence: "﴿الْعَزِيزُ الْجَبَّارُ الْمُتَكَبِّرُ﴾ [الحشر: 23]"
+    },
+    {
+        name: "الحافظ",
+        meaning: "الذي يحفظ خلقه وأعمالهم، ولا يضيع عنده شيء.",
+        evidence: "﴿فَاللَّهُ خَيْرٌ حَافِظًا﴾ [يوسف: 64]"
+    },
+    {
+        name: "الحسيب",
+        meaning: "الكافي لعباده، والمحاسب لهم على أعمالهم، الذي لا يخفى عليه شيء منها.",
+        evidence: "﴿وَكَفَىٰ بِاللَّهِ حَسِيبًا﴾ [النساء: 6]"
+    },
+    {
+        name: "الحفيظ",
+        meaning: "الحافظ لكل شيء، الذي أحاط علمه بجميع المخلوقات وأعمالها، ويحفظ أولياءه.",
+        evidence: "﴿إِنَّ رَبِّي عَلَىٰ كُلِّ شَيْءٍ حَفِيظٌ﴾ [هود: 57]"
+    },
+    {
+        name: "الحفي",
+        meaning: "كثير العناية والإكرام واللطف بعباده، القريب من عبده إذا دعاه وسأله.",
+        evidence: "﴿إِنَّهُ كَانَ بِي حَفِيًّا﴾ [مريم: 47]"
+    },
+    {
+        name: "الحق",
+        meaning: "الموجود حقًا، المستحق للعبادة، الذي لا شك في وجوده وربوبيته وألوهيته.",
+        evidence: "﴿فَذَٰلِكُمُ اللَّهُ رَبُّكُمُ الْحَقُّ﴾ [يونس: 32]"
+    },
+    {
+        name: "المبين",
+        meaning: "الظاهر الذي تتبين أفعاله وآياته، والمبين للحق لعباده.",
+        evidence: "﴿يَوْمَئِذٍ يُوَفِّيهِمُ اللَّهُ دِينَهُمُ الْحَقَّ وَيَعْلَمُونَ أَنَّ اللَّهَ هُوَ الْحَقُّ الْمُبِينُ﴾ [النور: 25]"
+    },
+    {
+        name: "الحكيم",
+        meaning: "الذي له الحكمة البالغة، يضع الأشياء في مواضعها، ولا يخلق ولا يشرع شيئًا عبثًا.",
+        evidence: "﴿وَهُوَ الْعَزِيزُ الْحَكِيمُ﴾ [الحشر: 24]"
+    },
+    {
+        name: "الحليم",
+        meaning: "الذي لا يعاجل العصاة بالعقوبة مع قدرته عليهم، بل يمهلهم لعلهم يتوبون.",
+        evidence: "﴿وَاللَّهُ غَفُورٌ حَلِيمٌ﴾ [البقرة: 225]"
+    },
+    {
+        name: "الحميد",
+        meaning: "المحمود في ذاته وأسمائه وصفاته وأفعاله، المستحق لجميع الحمد.",
+        evidence: "﴿وَهُوَ الْوَلِيُّ الْحَمِيدُ﴾ [الشورى: 28]"
+    },
+    {
+        name: "الحي",
+        meaning: "الكامل في حياته، حياةً أزلية أبدية لا يسبقها عدم ولا يلحقها فناء.",
+        evidence: "﴿اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ﴾ [البقرة: 255]"
+    },
+    {
+        name: "القيوم",
+        meaning: "القائم بنفسه، المقيم لغيره، القائم بتدبير جميع الخلق.",
+        evidence: "﴿الْحَيُّ الْقَيُّومُ﴾ [آل عمران: 2]"
+    },
+    {
+        name: "الخبير",
+        meaning: "العالم ببواطن الأمور ودقائقها وخفاياها، فلا يخفى عليه شيء.",
+        evidence: "﴿وَهُوَ الْحَكِيمُ الْخَبِيرُ﴾ [الأنعام: 18]"
+    }
+];
+// قائمة أسماء الله الحسنى - المجموعة الثانية (31 إلى 60)
+const asmaaAllahGroup2 = [
+    {
+        name: "الخالق",
+        meaning: "الذي أوجد جميع المخلوقات من العدم، وقدر خلقها وأحكمه.",
+        evidence: "﴿هُوَ اللَّهُ الْخَالِقُ الْبَارِئُ الْمُصَوِّرُ﴾ [الحشر: 24]"
+    },
+    {
+        name: "الخلاق",
+        meaning: "كثير الخلق، الذي لا يزال يخلق ما يشاء بحكمته وقدرته.",
+        evidence: "﴿أَلَا لَهُ الْخَلْقُ وَالْأَمْرُ﴾ [الأعراف: 54]، وقوله: ﴿إِنَّ رَبَّكَ هُوَ الْخَلَّاقُ الْعَلِيمُ﴾ [الحجر: 86]"
+    },
+    {
+        name: "الرؤوف",
+        meaning: "شديد الرأفة بعباده، والرأفة أخص من الرحمة، وتتضمن شدة العطف واللطف.",
+        evidence: "﴿إِنَّ اللَّهَ بِالنَّاسِ لَرَءُوفٌ رَحِيمٌ﴾ [البقرة: 143]"
+    },
+    {
+        name: "الرزاق",
+        meaning: "الذي يرزق جميع الخلق، ويتولى إيصال أرزاقهم إليهم.",
+        evidence: "﴿إِنَّ اللَّهَ هُوَ الرَّزَّاقُ ذُو الْقُوَّةِ الْمَتِينُ﴾ [الذاريات: 58]"
+    },
+    {
+        name: "الرقيب",
+        meaning: "المطلع على أحوال عباده وأعمالهم، الذي لا يغيب عنه شيء.",
+        evidence: "﴿إِنَّ اللَّهَ كَانَ عَلَيْكُمْ رَقِيبًا﴾ [النساء: 1]"
+    },
+    {
+        name: "السلام",
+        meaning: "السالم من كل نقص وعيب، والذي سلمت ذاته وصفاته وأفعاله من كل نقص.",
+        evidence: "﴿السَّلَامُ الْمُؤْمِنُ الْمُهَيْمِنُ﴾ [الحشر: 23]"
+    },
+    {
+        name: "السميع",
+        meaning: "الذي يسمع جميع الأصوات على اختلافها وتنوعها، ولا يخفى عليه شيء.",
+        evidence: "﴿إِنَّهُ هُوَ السَّمِيعُ الْعَلِيمُ﴾ [الأنفال: 61]"
+    },
+    {
+        name: "الشاكر",
+        meaning: "الذي يقبل العمل القليل ويثيب عليه ثوابًا كثيرًا، ويشكر لعباده طاعتهم.",
+        evidence: "﴿فَإِنَّ اللَّهَ شَاكِرٌ عَلِيمٌ﴾ [البقرة: 158]"
+    },
+    {
+        name: "الشكور",
+        meaning: "الذي يضاعف الحسنات ويثيب على العمل القليل بالثواب العظيم.",
+        evidence: "﴿إِنَّ رَبَّنَا لَغَفُورٌ شَكُورٌ﴾ [فاطر: 34]"
+    },
+    {
+        name: "الشهيد",
+        meaning: "الذي شهد جميع الأشياء علمًا وإحاطةً، ولا يغيب عنه شيء.",
+        evidence: "﴿وَاللَّهُ عَلَىٰ كُلِّ شَيْءٍ شَهِيدٌ﴾ [المجادلة: 6]"
+    },
+    {
+        name: "الصمد",
+        meaning: "السيد الكامل المقصود في جميع الحوائج، المستغني عن خلقه، المفتقر إليه جميع خلقه.",
+        evidence: "﴿اللَّهُ الصَّمَدُ﴾ [الإخلاص: 2]"
+    },
+    {
+        name: "العالم",
+        meaning: "العالم بكل شيء، المحيط علمه بكل ما كان وما يكون وما لا يكون.",
+        evidence: "﴿عَالِمُ الْغَيْبِ وَالشَّهَادَةِ الْكَبِيرُ الْمُتَعَالِ﴾ [الرعد: 9]"
+    },
+    {
+        name: "العزيز",
+        meaning: "الذي له العزة الكاملة، فلا يُغلب ولا يُقهر، وهو القوي الغالب.",
+        evidence: "﴿وَهُوَ الْعَزِيزُ الْحَكِيمُ﴾ [الحشر: 24]"
+    },
+    {
+        name: "العظيم",
+        meaning: "العظيم في ذاته وأسمائه وصفاته وأفعاله، وكل عظمة في الخلق فهي من آثار عظمته.",
+        evidence: "﴿وَهُوَ الْعَلِيُّ الْعَظِيمُ﴾ [البقرة: 255]"
+    },
+    {
+        name: "العفو",
+        meaning: "الذي يتجاوز عن الذنوب ويمحو آثارها ولا يؤاخذ بها، لمن شاء من عباده.",
+        evidence: "﴿إِنَّ اللَّهَ كَانَ عَفُوًّا غَفُورًا﴾ [النساء: 43]"
+    },
+    {
+        name: "العليم",
+        meaning: "الذي أحاط علمه بكل شيء، فلا يخفى عليه شيء في الأرض ولا في السماء.",
+        evidence: "﴿إِنَّ اللَّهَ بِكُلِّ شَيْءٍ عَلِيمٌ﴾ [الأنفال: 75]"
+    },
+    {
+        name: "العلي",
+        meaning: "العالي بذاته وقدره وقهره، المتصف بغاية العلو والكمال.",
+        evidence: "﴿وَهُوَ الْعَلِيُّ الْعَظِيمُ﴾ [البقرة: 255]"
+    },
+    {
+        name: "الغفار",
+        meaning: "كثير المغفرة، يغفر ذنوب عباده إذا تابوا وأنابوا إليه.",
+        evidence: "﴿وَإِنِّي لَغَفَّارٌ لِمَنْ تَابَ وَآمَنَ﴾ [طه: 82]"
+    },
+    {
+        name: "الغفور",
+        meaning: "كثير المغفرة، الذي يستر الذنوب ويتجاوز عنها.",
+        evidence: "﴿وَإِنَّ رَبِّي لَغَفُورٌ رَحِيمٌ﴾ [هود: 90]"
+    },
+    {
+        name: "الغني",
+        meaning: "المستغني عن جميع خلقه، المفتقر إليه كل خلقه، له الغنى المطلق.",
+        evidence: "﴿وَاللَّهُ الْغَنِيُّ وَأَنْتُمُ الْفُقَرَاءُ﴾ [محمد: 38]"
+    },
+    {
+        name: "الفتاح",
+        meaning: "الذي يفتح أبواب رحمته ورزقه ونصره، ويفتح بين عباده بالحق.",
+        evidence: "﴿وَهُوَ الْفَتَّاحُ الْعَلِيمُ﴾ [سبأ: 26]"
+    },
+    {
+        name: "القادر",
+        meaning: "المتصف بالقدرة الكاملة، فلا يعجزه شيء.",
+        evidence: "﴿قُلْ هُوَ الْقَادِرُ عَلَىٰ أَن يَبْعَثَ عَلَيْكُمْ عَذَابًا﴾ [الأنعام: 65]"
+    },
+    {
+        name: "القاهر",
+        meaning: "الذي قهر جميع الخلق بقدرته وسلطانه، وخضعت له الموجودات كلها.",
+        evidence: "﴿وَهُوَ الْقَاهِرُ فَوْقَ عِبَادِهِ﴾ [الأنعام: 18]"
+    },
+    {
+        name: "القدوس",
+        meaning: "المنزه عن كل عيب ونقص، المتصف بصفات الكمال والجلال.",
+        evidence: "﴿الْمَلِكُ الْقُدُّوسُ السَّلَامُ﴾ [الحشر: 23]"
+    },
+    {
+        name: "القدير",
+        meaning: "كامل القدرة، الذي لا يعجزه شيء، وقدرته نافذة في كل شيء.",
+        evidence: "﴿إِنَّ اللَّهَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ﴾ [البقرة: 20]"
+    },
+    {
+        name: "القريب",
+        meaning: "القريب من عباده بعلمه وإحاطته وإجابته، وهو قريب من الداعي إذا دعاه.",
+        evidence: "﴿إِنَّ رَبِّي قَرِيبٌ مُّجِيبٌ﴾ [هود: 61]"
+    },
+    {
+        name: "القوي",
+        meaning: "كامل القوة، الذي لا يعجزه شيء ولا يلحق قدرته ضعف.",
+        evidence: "﴿إِنَّ اللَّهَ لَقَوِيٌّ عَزِيزٌ﴾ [الحج: 40]"
+    },
+    {
+        name: "القهار",
+        meaning: "الذي قهر جميع الخلق، ودانت له الموجودات، ولا يخرج أحد عن قدرته وسلطانه.",
+        evidence: "﴿وَهُوَ الْوَاحِدُ الْقَهَّارُ﴾ [الرعد: 16]"
+    },
+    {
+        name: "الكبير",
+        meaning: "العظيم الذي كل شيء دونه، المتصف بالكبرياء والعظمة.",
+        evidence: "﴿الْكَبِيرُ الْمُتَعَالِ﴾ [الرعد: 9]"
+    },
+    {
+        name: "المصور",
+        meaning: "الذي أعطى كل مخلوق صورته وهيئته المناسبة لحكمته.",
+        evidence: "﴿الْخَالِقُ الْبَارِئُ الْمُصَوِّرُ﴾ [الحشر: 24]"
+    }
+];
+// قائمة أسماء الله الحسنى - المجموعة الثالثة (الأخيرة)
+const asmaaAllahGroup3 = [
+    {
+        name: "المتعال",
+        meaning: "المنزه عن صفات المخلوقين، العالي فوق كل شيء بقدرته وعظمته وقهره.",
+        evidence: "﴿الْكَبِيرُ الْمُتَعَالِ﴾ [الرعد: 9]"
+    },
+    {
+        name: "المتين",
+        meaning: "شديد القوة، الذي لا ينفد كيده ولا يلحقه ضعف في فعله.",
+        evidence: "﴿إِنَّ اللَّهَ هُوَ الرَّزَّاقُ ذُو الْقُوَّةِ الْمَتِينُ﴾ [الذاريات: 58]"
+    },
+    {
+        name: "المجيب",
+        meaning: "الذي يقيب دعوة الداعين، ويجيب المضطرين ويكشف الضر عنهم.",
+        evidence: "﴿إِنَّ رَبِّي قَرِيبٌ مُّجِيبٌ﴾ [هود: 61]"
+    },
+    {
+        name: "المحيط",
+        meaning: "الذي أحاط بكل شيء علمًا وقدرةً وقهرًا، فلا يفوته شيء.",
+        evidence: "﴿وَكَانَ اللَّهُ بِكُلِّ شَيْءٍ مُّحِيطًا﴾ [النساء: 126]"
+    },
+    {
+        name: "المحيي",
+        meaning: "الذي يحيي المخلوقات وينفخ فيها الروح، ويحيي القلوب بالإيمان والحكمة.",
+        evidence: "﴿إِنَّ ذَلِكَ لَمُحْيِي الْمَوْتَى﴾ [يس: 33]"
+    },
+    {
+        name: "المميت",
+        meaning: "الذي يقدر الموت على خلقه لحكمته، وهو الذي كتب الفناء على كل المخلوقات سوى وجهه الكريم.",
+        evidence: "﴿وَهُوَ الَّذِي يُحْيِي وَيُمِيتُ﴾ [المؤمنون: 80]"
+    },
+    {
+        name: "المخزي",
+        meaning: "الذي يذل أعداءه ويفضحهم، ويطرحهم في الذل والهوان.",
+        evidence: "﴿وَأَنَّ اللَّهَ مُخْزِي الْكَافِرِينَ﴾ [التوبة: 2]"
+    },
+    {
+        name: "المرصاد",
+        meaning: "الذي يرصد أعمال عباده، ولا يغفل عن ظالم، وله بالمرصاد.",
+        evidence: "﴿إِنَّ رَبَّكَ لَبِالْمِرْصَادِ﴾ [الفجر: 14]"
+    },
+    {
+        name: "المستعان",
+        meaning: "الذي يُطلب منه العون والمساعدة في كل الأمور، وحده لا شريك له.",
+        evidence: "﴿وَاللَّهُ الْمُسْتَعَانُ عَلَى مَا تَصِفُونَ﴾ [يوسف: 18]"
+    },
+    {
+        name: "المصور",
+        meaning: "الذي أوجد خلقه على الصور التي أرادها بحكمته ومشيئته.",
+        evidence: "﴿هُوَ اللَّهُ الْخَالِقُ الْبَارِئُ الْمُصَوِّرُ﴾ [الحشر: 24]"
+    },
+    {
+        name: "المقيت",
+        meaning: "الحفيظ والمقتدر على كل شيء، وقيل: الذي يقوت الأجسام والقلوب بما يصلحها.",
+        evidence: "﴿وَكَانَ اللَّهُ عَلَى كُلِّ شَيْءٍ مُّقِيتًا﴾ [النساء: 85]"
+    },
+    {
+        name: "الملك",
+        meaning: "مالك الملك، المتصرف في ملكه كيف يشاء بلا منازع.",
+        evidence: "﴿مَالِكِ يَوْمِ الدِّينِ﴾ [الفاتحة: 4]"
+    },
+    {
+        name: "المليك",
+        meaning: "صيغة مبالغة تدل على عظم الملك والقدرة التامة والسلطان العظيم.",
+        evidence: "﴿فِي مَقْعَدِ صِدْقٍ عِندَ مَلِيكٍ مُّقْتَدِرٍ﴾ [القمر: 55]"
+    },
+    {
+        name: "المميز",
+        meaning: "الذي يفصل بين الحق والباطل، ويميز بين الصادق والكاذب.",
+        evidence: "﴿لِيَمِيزَ اللَّهُ الْخَبِيثَ مِنَ الطَّيِّبِ﴾ [الأنفال: 37]"
+    },
+    {
+        name: "المهيمن",
+        meaning: "الرقيب الحافظ المسيطر على خلقه، القائم بأمورهم.",
+        evidence: "﴿الْمُهَيْمِنُ الْعَزِيزُ الْجَبَّارُ﴾ [الحشر: 23]"
+    },
+    {
+        name: "المؤمن",
+        meaning: "الذي أمن عباده من ظلمه، وصدق رسله ووعده ووعيده.",
+        evidence: "﴿الْمُؤْمِنُ الْمُهَيْمِنُ﴾ [الحشر: 23]"
+    },
+    {
+        name: "النصير",
+        meaning: "الناصر لأوليائه، المعين لهم على أعدائهم، ونعم النصير.",
+        evidence: "﴿وَاعْلَمُوا أَنَّ اللَّهَ مَوْلاكُمْ نِعْمَ الْمَوْلَى وَنِعْمَ النَّصِيرُ﴾ [الأنفال: 40]"
+    },
+    {
+        name: "الهادي",
+        meaning: "الذي يرشد عباده ويهديهم إلى سبل السلام والحق والإيمان.",
+        evidence: "﴿وَإِنَّ اللَّهَ لَهَادِ الَّذِينَ آمَنُوا إِلَى صِرَاطٍ مُّسْتَقِيمٍ﴾ [الحج: 54]"
+    },
+    {
+        name: "الواحد",
+        meaning: "المتفرد في ذاته وصفاته وأفعاله، فلا شريك له ولا نظير.",
+        evidence: "﴿قُلِ اللَّهُ خَالِقُ كُلِّ شَيْءٍ وَهُوَ الْوَاحِدُ الْقَهَّارُ﴾ [الرعد: 16]"
+    },
+    {
+        name: "الوارث",
+        meaning: "الباقي بعد فناء الخلق، وإليه ترجع الأموال والممتلكات كلها.",
+        evidence: "﴿وَإِنَّا لَنَحْنُ نُحْيِي وَنُمِيتُ وَنَحْنُ الْوَارِثُونَ﴾ [الحجر: 23]"
+    },
+    {
+        name: "الواسع",
+        meaning: "الذي وسع كل شيء رحمةً وعلماً وفضلاً وعظمةً.",
+        evidence: "﴿إِنَّ اللَّهَ وَاسِعٌ عَلِيمٌ﴾ [البقرة: 115]"
+    },
+    {
+        name: "الودود",
+        meaning: "المحب لعباده الصالحين، والمحبوب في قلوب أوليائه لصفات كرمه وإحسانه.",
+        evidence: "﴿وَهُوَ الْغَفُورُ الْوَدُودُ﴾ [البروج: 14]"
+    },
+    {
+        name: "الوكيل",
+        meaning: "الكفيل بأمور خلقه، الذي يُتوكل عليه ويُعتمد في قضاء الحوائج.",
+        evidence: "﴿وَحَسْبُنَا اللَّهُ وَنِعْمَ الْوَوكِيلُ﴾ [آل عمران: 173]"
+    },
+    {
+        name: "الولي",
+        meaning: "الناصر والمحب والمعين لأوليائه المؤمنين، يتولى هدايتهم وحفظهم.",
+        evidence: "﴿اللَّهُ وَلِيُّ الَّذِينَ آمَنُوا يُخْرِجُهُم مِّنَ الظُّلُمَاتِ إِلَى النُّورِ﴾ [البقرة: 257]"
+    },
+    {
+        name: "الوهاب",
+        meaning: "كثير العطاء والهبات، الذي يعطي بلا عوض وبلا منّة.",
+        evidence: "﴿رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِللَدُنكَ رَحْمَةً إِنَّكَ أَنْتَ الْوَهَّابُ﴾ [آل عمران: 8]"
+    },
+    {
+        name: "الستار",
+        meaning: "الذي يستر عيوب عباده وذنوبهم ولا يفضحهم، ويحب الستر.",
+        evidence: "قال رسول الله ﷺ: «إن الله عز وجل حليم حيي ستير يحب الحياء والستر...» [صحيح أبي داود]"
+    },
+    {
+        name: "الطيب",
+        meaning: "المنزه عن كل نقص، المنزه عن كل سوء، والذي لا يقبل إلا طيباً.",
+        evidence: "قال رسول الله ﷺ: «إن الله تعالى طيب لا يقبل إلا طيباً» [صحيح مسلم]"
+    },
+    {
+        name: "الحكم",
+        meaning: "الذي يحكم بين خلقه بالحق والعدل المطلق، ولا يظلم أحداً مثقال ذرة.",
+        evidence: "﴿أَفَغَيْرَ اللَّهِ أَبْتَغِي حَكَمًا وَهُوَ الَّذِي أَنزَلَ إِلَيْكُمُ الْكِتَابَ مُفَصَّلاً﴾ [الأنعام: 114]"
+    }
+];
+// دمج المجموعات الثلاث معاً لتشمل الأسماء الـ 88 كامِلةً
+const allAsmaa = [
+    ...asmaaAllahGroup1, 
+    ...asmaaAllahGroup2, 
+    ...asmaaAllahGroup3
+];
+
+// دالة العرض لتختار عشوائياً من الـ 88 اسماً مع كل فتح للصفحة
+function displayRandomAsmaa() {
+    if (typeof allAsmaa !== 'undefined' && allAsmaa.length > 0) {
+        const randomIndex = Math.floor(Math.random() * allAsmaa.length);
+        const selectedAsm = allAsmaa[randomIndex];
+        
+        document.getElementById('asmaName').innerText = selectedAsm.name;
+        document.getElementById('asmaMeaning').innerText = selectedAsm.meaning;
+        document.getElementById('asmaEvidence').innerText = selectedAsm.evidence;
+    }
+}
+
+// تشغيل الدالة عند تحميل الصفحة
+window.onload = function() {
+    displayRandomAsmaa();
+};
+  
+// دالة لاختيار اسم عشوائي وعرضه عند تحميل الصفحة
+function displayRandomAsmaa() {
+    const randomIndex = Math.floor(Math.random() * asmaaAllahGroup1.length);
+    const selectedAsm = asmaaAllahGroup1[randomIndex];
+    
+    document.getElementById('asmaName').innerText = selectedAsm.name;
+    document.getElementById('asmaMeaning').innerText = selectedAsm.meaning;
+    document.getElementById('asmaEvidence').innerText = selectedAsm.evidence;
+}
+
+
+// تشغيل الدالة بمجرد فتح الصفحة
+window.onload = function() {
+    // يمكنك استدعاء الدوال هنا
+    displayRandomAsmaa();
+};
+    
+    
+  
+
+    // صوت خفيف وراقي لجميع أزرار المنصة
+    (function () {
+        let audioCtx = null;
+
+        function playButtonSound() {
+            try {
+                audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === "suspended") audioCtx.resume();
+
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = "sine";
+                osc.frequency.setValueAtTime(520, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(390, audioCtx.currentTime + 0.055);
+
+                gain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.045, audioCtx.currentTime + 0.008);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.065);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.07);
+            } catch (e) {}
+        }
+
+        document.addEventListener("click", function (event) {
+            const button = event.target.closest("button, .quick-btn, .nav-link, .azkar-item");
+            if (button) playButtonSound();
+        }, { passive: true });
+    })();
+
+</script>
+
+</body>
+</html>
