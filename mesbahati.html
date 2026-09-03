@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مِسْبَحَتِي 📿</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+:root{
+  --bg:#fff8fb;--surface:#fff;--surface2:#fff1f5;--rose:#c85d7b;--rose2:#e79ab1;
+  --ink:#2d2529;--muted:#817279;--line:#f0dce3;--gold:#c79a4a;
+  --shadow:0 14px 40px rgba(157,75,101,.11);--radius:24px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(circle at 20% 0%,#fff 0,#f4e8ed 55%,#eadce2 100%);
+font-family:'Cairo',sans-serif;color:var(--ink);display:flex;justify-content:center;min-height:100vh}
+button{font:inherit}
+.app-container{width:100%;max-width:440px;min-height:100vh;background:var(--bg);position:relative;
+box-shadow:0 10px 45px rgba(65,35,45,.13);overflow:hidden;padding-bottom:28px}
+.app-header{position:relative;background:linear-gradient(135deg,#e9a9bc,#c85d7b);
+color:#fff;padding:18px 18px 28px;border-radius:0 0 30px 30px;box-shadow:0 8px 25px rgba(200,93,123,.25)}
+.app-header:after{content:"";position:absolute;width:150px;height:150px;border:1px solid rgba(255,255,255,.22);
+border-radius:50%;left:-65px;top:-80px}
+.header-row{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}
+.header-title{display:flex;align-items:center;gap:9px;font-size:1.48rem;font-weight:800}
+.header-sub{font-size:.76rem;opacity:.88;margin-top:2px}
+.header-tools{display:flex;gap:7px}
+.icon-btn{width:38px;height:38px;border:1px solid rgba(255,255,255,.28);border-radius:13px;
+background:rgba(255,255,255,.15);color:#fff;display:grid;place-items:center;cursor:pointer}
+.tracks-container{padding:15px 14px 7px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.tracks-container::-webkit-scrollbar{display:none}
+.track-chip{background:var(--surface);border:1px solid var(--line);padding:9px 14px;border-radius:18px;
+font-size:.84rem;font-weight:700;white-space:nowrap;color:var(--ink);cursor:pointer;transition:.22s}
+.track-chip.active{background:var(--rose);color:#fff;border-color:var(--rose);box-shadow:0 7px 18px rgba(200,93,123,.2)}
+.sub-header-hint{padding:4px 16px 2px;color:var(--muted);font-size:.83rem;font-weight:700;text-align:center}
+.counter-card{margin:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:30px;
+padding:20px 16px;text-align:center;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;gap:11px;position:relative;overflow:hidden}
+.counter-card:before{content:"";position:absolute;inset:auto -70px -105px;width:240px;height:180px;background:var(--surface2);border-radius:50%}
+.selected-dhikr-title{font-size:1.28rem;color:var(--rose);font-weight:800;line-height:1.6;min-height:41px;display:flex;align-items:center;justify-content:center;position:relative}
+.dhikr-meaning{font-size:.82rem;color:var(--muted);margin-top:-7px;position:relative}
+.progress-indicator{font-size:.8rem;color:var(--rose);background:var(--surface2);padding:5px 14px;border-radius:14px;font-weight:800;position:relative}
+.tap-wrap{position:relative;width:180px;height:180px;display:grid;place-items:center;margin:1px 0}
+.progress-ring{position:absolute;inset:0;transform:rotate(-90deg);filter:drop-shadow(0 7px 12px rgba(200,93,123,.15))}
+.progress-ring circle{fill:none;stroke-width:7}
+.ring-bg{stroke:#f7e6ec}.ring-fill{stroke:var(--rose);stroke-linecap:round;transition:stroke-dashoffset .25s ease}
+.tap-button{width:145px;height:145px;border-radius:50%;background:linear-gradient(145deg,#fff,#fdeef3);
+border:7px solid #f8e7ed;box-shadow:inset 0 0 0 1px #fff,0 12px 28px rgba(200,93,123,.18);
+display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer;user-select:none;
+margin:0;transition:transform .08s ease,box-shadow .2s ease;position:relative;z-index:2}
+.tap-button:hover{box-shadow:inset 0 0 0 1px #fff,0 15px 32px rgba(200,93,123,.23)}
+.tap-button:active{transform:scale(.93)}
+.count-display{font-size:3.25rem;font-weight:800;color:var(--rose);line-height:1}
+.tap-hint{font-size:.78rem;color:var(--muted);margin-top:6px;font-weight:800}
+.quick-stats{display:flex;gap:8px;width:100%;position:relative}
+.stat{flex:1;background:#fff8fa;border:1px solid var(--line);border-radius:15px;padding:8px 4px}
+.stat b{display:block;color:var(--rose);font-size:1rem}.stat span{font-size:.68rem;color:var(--muted);font-weight:700}
+.action-bar{display:flex;justify-content:center;gap:8px;width:100%;position:relative}
+.action-btn{border:1px solid var(--line);background:var(--surface2);border-radius:13px;padding:8px 12px;color:var(--rose);
+font-size:.78rem;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:6px}
+.action-btn.primary{background:var(--rose);color:#fff;border-color:var(--rose)}
+.source-box{background:var(--surface2);color:var(--ink);padding:10px 12px;border-radius:14px;font-size:.78rem;
+line-height:1.6;width:100%;text-align:right;position:relative}
+.completion-msg{display:none;background:linear-gradient(135deg,#fff0f4,#fff8fa);color:var(--rose);
+padding:11px 13px;border-radius:15px;font-size:.86rem;font-weight:800;width:100%;border:1px solid var(--line);position:relative}
+.dhikr-select-list{padding:0 14px;display:flex;flex-direction:column;gap:9px}
+.dhikr-option-card,.formula-card{background:var(--surface);border:1px solid var(--line);border-radius:17px;padding:12px 13px;
+display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:.18s;box-shadow:0 4px 13px rgba(130,70,90,.04)}
+.dhikr-option-card:hover,.formula-card:hover{transform:translateY(-1px);border-color:#e5a0b4}
+.dhikr-option-card.selected{border-color:var(--rose);background:var(--surface2);box-shadow:0 6px 18px rgba(200,93,123,.08)}
+.dhikr-option-title,.formula-title{font-size:.93rem;font-weight:800;color:var(--ink)}
+.dhikr-option-sub,.formula-desc{font-size:.74rem;color:var(--muted);line-height:1.45}
+.formula-card{display:block}.formula-title{color:var(--rose);margin-bottom:4px}.formula-desc.source{margin-top:4px;color:var(--rose);font-weight:800}
+.footer-dedication{text-align:center;padding:13px;font-size:.8rem;color:var(--muted);line-height:1.7;background:var(--surface2);
+margin:18px 14px 0;border-radius:16px;border:1px solid var(--line)}
+.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,20px);background:#2d2529;color:#fff;
+padding:10px 15px;border-radius:14px;font-size:.78rem;font-weight:700;opacity:0;pointer-events:none;transition:.25s;z-index:50;white-space:nowrap}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@keyframes pop{0%{transform:scale(.93)}55%{transform:scale(1.05)}100%{transform:scale(1)}}
+.pop{animation:pop .22s ease}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+  <div class="app-container">
+
+    <div class="app-header">
+        <div class="header-row">
+            <button class="icon-btn" id="backBtn" title="رجوع">
+    <i class="fa-solid fa-arrow-right"></i>
+</button>
+            <div>
+                <div class="header-title"><span>مِسْبَحَتِي </span></div>
+<div class="header-sub">
+    ﴿ تُسَبِّحُ لَهُ السَّمَاوَاتُ السَّبْعُ وَالْأَرْضُ وَمَن فِيهِنَّ ۖ
+    وَإِن مِّن شَيْءٍ إِلَّا يُسَبِّحُ بِحَمْدِهِ وَلَٰكِن لَّا تَفْقَهُونَ تَسْبِيحَهُمْ ۗ
+    إِنَّهُ كَانَ حَلِيمًا غَفُورًا ﴾
+<div class="verse-source">سورة الإسراء · الآية ٤٤</div>
+</div>           
+                <div class="header-sub"></div>
+            </div>
+            <div class="header-tools">
+                <button class="icon-btn" id="soundBtn" title="تشغيل/كتم صوت النقرة"><i class="fa-solid fa-volume-high"></i></button>
+                <button class="icon-btn" id="headerResetBtn" title="تصفير العداد"><i class="fa-solid fa-rotate-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="tracks-container">
+        <div class="track-chip active" id="chipOpen">🫧 التسبيح المطلق</div>
+        <div class="track-chip" id="chipPick">✨ اختر لي ذكرًا</div>
+        <div class="track-chip" id="chipPost">🕌 بعد الصلاة</div>
+    </div>
+
+    <div class="sub-header-hint" id="subHeaderHint">اختر ذكرك… وابدأ.</div>
+
+    <div class="counter-card" id="mainCounterCard">
+        <div class="selected-dhikr-title" id="activeDhikrText">--</div>
+        <div class="dhikr-meaning" id="activeDhikrMeaning">--</div>
+        <div class="progress-indicator" id="progressText">العداد: 0 | الهدف: ∞</div>
+
+        <div class="tap-wrap">
+            <svg class="progress-ring" viewBox="0 0 180 180" aria-hidden="true">
+                <circle class="ring-bg" cx="90" cy="90" r="80"></circle>
+                <circle class="ring-fill" id="ringFill" cx="90" cy="90" r="80"></circle>
+            </svg>
+            <div class="tap-button" id="mainTapBtn" aria-label="التسبيح">
+                <div class="count-display" id="countDisplay">0</div>
+                <div class="tap-hint">اضغطي للذكر 🌿</div>
+            </div>
+        </div>
+        <div class="quick-stats">
+            <div class="stat"><b id="sessionTotal">0</b><span>هذا الذكر</span></div>
+            <div class="stat"><b id="goalTotal">∞</b><span>الهدف</span></div>
+            <div class="stat"><b id="allTotal">0</b><span>إجمالي اليوم</span></div>
+        </div>
+
+        <div class="action-bar">
+            <button class="action-btn" id="pickAnotherBtn" style="display: none;">
+                <i class="fa-solid fa-shuffle"></i> ذكر آخر
+            </button>
+            <button class="action-btn" id="actionResetBtn">
+                <i class="fa-solid fa-rotate-right"></i> تصفير العداد
+            </button>
+        </div>
+
+        <div class="source-box" id="sourceBox"></div>
+        <div class="completion-msg" id="completionMsg"></div>
+    </div>
+
+    <div class="dhikr-select-list" id="dhikrList"></div>
+
+    <div class="footer-dedication">
+        إنِ اسْتَعَنْتَ بِهَذَا الذِّكْرِ، فَلَا تَنْسَ <b>هديل وَوَالِدَيْهَا</b> مِنْ صَالِحِ دُعَائِكَ 🌿
+    </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const completionMessages = [
+            "الحمد لله الذي أعانك على ذكره.",
+            "🌿 تمّ وردك، فهنيئًا لقلبٍ عَمَرَه الذكر.",
+            "ذكرتَ الله، فاذكره بقلبك كما ذكرته بلسانك.",
+            "خطوات صغيرة، وذكرٌ عظيم.",
+            "بارك الله في ذكرك، وتقبّل منك.",
+            "ما أجمل أن ينتهي وقتك بذكر الله."
+        ];
+
+        const openDhikrList = [
+            { id: "op_1", title: "1. سبحان الله", text: "سُبْحَانَ اللَّهِ", meaning: "تنزيه الله تعالى عن كل نقص", target: null, source: "تسبيح مطلق مفتوح." },
+            { id: "op_2", title: "2. الحمد لله", text: "الْحَمْدُ لِلَّهِ", meaning: "حمد الله تعالى و الثناء عليه", target: null, source: "تسبيح مطلق مفتوح." },
+            { id: "op_3", title: "3. الله أكبر", text: "اللَّهُ أَكْبَرُ", meaning: "استحضار عظمة الله تعالى", target: null, source: "تسبيح مطلق مفتوح." },
+            { id: "op_4", title: "4. لا إله إلا الله", text: "لَا إِلَهَ إِلَّا اللَّهُ", meaning: "كلمة التوحيد", target: null, source: "تسبيح مطلق مفتوح." },
+            { id: "op_5", title: "5. لا حول ولا قوة إلا بالله", text: "لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ", meaning: "استعانة وافتقار إلى الله", target: null, source: "كنز من كنوز الجنة." },
+            { id: "op_6", title: "6. سبحان الله وبحمده", text: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ", meaning: "فضل عظيم وتكفير للذنوب", target: null, source: "من أحب الكلام إلى الله." },
+            { id: "op_7", title: "7. سبحان الله وبحمده، سبحان الله العظيم", text: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، سُبْحَانَ اللَّهِ الْعَظِيمِ", meaning: "ثقيلتان في الميزان حبيبتان إلى الرحمن", target: null, source: "📚 صحيح البخاري وصحيح مسلم." },
+            { id: "op_8", title: "8. الصلاة على النبي", text: "اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ", meaning: "الصلاة والسلام على رسول الله", target: null, source: "📚 رواه مسلم." }
+        ];
+
+        const postPrayerFormulas = [
+            {
+                id: "f1",
+                title: "الصيغة الأولى (المجموع 100)",
+                desc: "سبحان الله (33) + الحمد لله (33) + الله أكبر (34)",
+                source: "📚 صحيح البخاري وصحيح مسلم",
+                items: [
+                    { id: "pp_f1_1", title: "سبحان الله", text: "سُبْحَانَ اللَّهِ", meaning: "أذكار ما بعد الصلاة", target: 33, source: "📚 صحيح البخاري ومسلم" },
+                    { id: "pp_f1_2", title: "الحمد لله", text: "الْحَمْدُ لِلَّهِ", meaning: "أذكار ما بعد الصلاة", target: 33, source: "📚 صحيح البخاري ومسلم" },
+                    { id: "pp_f1_3", title: "الله أكبر", text: "اللَّهُ أَكْبَرُ", meaning: "أذكار ما بعد الصلاة", target: 34, source: "📚 صحيح البخاري ومسلم" }
+                ]
+            },
+            {
+                id: "f2",
+                title: "الصيغة الثانية (33/33/33 + التهليل)",
+                desc: "سبحان الله (33) + الحمد لله (33) + الله أكبر (33) + لا إله إلا الله (1)",
+                source: "📚 صحيح مسلم",
+                items: [
+                    { id: "pp_f2_1", title: "سبحان الله", text: "سُبْحَانَ اللَّهِ", meaning: "تمام المائة", target: 33, source: "📚 صحيح مسلم" },
+                                     { id: "pp_f2_2", title: "الحمد لله", text: "الْحَمْدُ لِلَّهِ", meaning: "تمام المائة", target: 33, source: "📚 صحيح مسلم" },
+                    { id: "pp_f2_3", title: "الله أكبر", text: "اللَّهُ أَكْبَرُ", meaning: "تمام المائة", target: 33, source: "📚 صحيح مسلم" },
+                    { id: "pp_f2_4", title: "ختام المائة", text: "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ", meaning: "ختام المائة بالتهليل", target: 1, source: "📚 صحيح مسلم" }
+                ]
+            }
+        ];
+
+        let currentTrack = 'open';
+        let currentDhikrIndex = 0;
+        let selectedFormulaIndex = null;
+        let currentPickItem = openDhikrList[0];
+        let counts = {};
+        let soundEnabled = localStorage.getItem('misbahati_sound') !== '0';
+        let todayKey = new Date().toISOString().slice(0,10);
+        let todayTotal = Number(localStorage.getItem('misbahati_total_' + todayKey) || 0);
+
+        try { counts = JSON.parse(localStorage.getItem('misbahati_counts') || '{}') || {}; } catch(e) { counts = {}; }
+        function saveState(){
+            localStorage.setItem('misbahati_counts', JSON.stringify(counts));
+            localStorage.setItem('misbahati_total_' + todayKey, String(todayTotal));
+        }
+        function getCount(id) { return counts[id] || 0; }
+        function setCount(id, val) { counts[id] = val; saveState(); }
+        function showToast(text){
+            const t=document.getElementById('toast'); t.textContent=text; t.classList.add('show');
+            clearTimeout(window.__toast); window.__toast=setTimeout(()=>t.classList.remove('show'),1700);
+        }
+        function updateRing(item,count){
+            const ring=document.getElementById('ringFill');
+            const r=80, c=2*Math.PI*r;
+            ring.style.strokeDasharray=c;
+            const pct=item && item.target ? Math.min(count/item.target,1) : 0.18;
+            ring.style.strokeDashoffset=c*(1-pct);
+            ring.style.opacity=item && item.target ? '1' : '.35';
+        }
+        // صوت خفيف وآمن باستخدام HTMLAudioElement فقط.
+        // لا نستخدم WebAudio/AudioContext حتى لا تظهر أخطاء جهاز الصوت.
+               const tickSound = new Audio("data:audio/wav;base64,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");
+              tickSound.preload = "auto";
+        tickSound.volume = 0.55;
+
+        function playTick(){
+            if(!soundEnabled) return;
+            try{
+                tickSound.currentTime = 0;
+                const promise = tickSound.play();
+                if(promise && promise.catch) promise.catch(()=>{});
+            }catch(e){}
+            try{ if(navigator.vibrate) navigator.vibrate(10); }catch(e){}
+        }
+
+        // صوت خفيف لكل عناصر النقر، مع استثناء زر التسبيح حتى لا يتكرر الصوت.
+        function playButtonSound(){
+            if(!soundEnabled) return;
+            try{
+                tickSound.currentTime = 0;
+                const promise = tickSound.play();
+                if(promise && promise.catch) promise.catch(()=>{});
+            }catch(e){}
+        }
+
+        function getActiveItem() {
+            if (currentTrack === 'open') return openDhikrList[currentDhikrIndex];
+            if (currentTrack === 'pick') return currentPickItem;
+            if (currentTrack === 'post_prayer' && selectedFormulaIndex !== null) {
+                return postPrayerFormulas[selectedFormulaIndex].items[currentDhikrIndex];
+            }
+            return null;
+        }
+
+        function updateUI() {
+            const counterCard = document.getElementById('mainCounterCard');
+            const listContainer = document.getElementById('dhikrList');
+            const pickBtn = document.getElementById('pickAnotherBtn');
+            const subHeader = document.getElementById('subHeaderHint');
+
+            if (currentTrack === 'post_prayer' && selectedFormulaIndex === null) {
+                counterCard.style.display = 'none';
+                subHeader.innerText = "اختر الصيغة المناسبة لك بعد الصلاة:";
+                listContainer.style.display = 'flex';
+                listContainer.innerHTML = '';
+
+                postPrayerFormulas.forEach((formula, idx) => {
+                    const card = document.createElement('div');
+                    card.className = 'formula-card';
+                    card.innerHTML = `
+                        <div class="formula-title">${formula.title}</div>
+                        <div class="formula-desc">${formula.desc}</div>
+                        <div class="formula-desc" style="margin-top:4px; color:var(--rose-accent); font-weight:700;">${formula.source}</div>
+                    `;
+                    card.onclick = function() {
+                        selectedFormulaIndex = idx;
+                        currentDhikrIndex = 0;
+                        updateUI();
+                    };
+                    listContainer.appendChild(card);
+                });
+                return;
+            }
+
+            counterCard.style.display = 'flex';
+            const activeItem = getActiveItem();
+            if (!activeItem) return;
+
+            const count = getCount(activeItem.id);
+
+            document.getElementById('activeDhikrText').innerText = activeItem.text;
+            document.getElementById('activeDhikrMeaning').innerText = activeItem.meaning;
+            document.getElementById('countDisplay').innerText = count;
+            document.getElementById('sourceBox').innerText = activeItem.source;
+            document.getElementById('sessionTotal').innerText = count;
+            document.getElementById('goalTotal').innerText = activeItem.target || '∞';
+            document.getElementById('allTotal').innerText = todayTotal;
+            updateRing(activeItem, count);
+
+            if (currentTrack === 'pick') {
+                subHeader.innerText = "✨ اخترنا لك ذكرًا مباركًا";
+                pickBtn.style.display = 'inline-flex';
+            } else if (currentTrack === 'open') {
+                subHeader.innerText = "اختر ذكرك… وابدأ.";
+                pickBtn.style.display = 'none';
+            } else {
+                subHeader.innerText = postPrayerFormulas[selectedFormulaIndex].title;
+                pickBtn.style.display = 'none';
+            }
+
+            const progressEl = document.getElementById('progressText');
+            const msgEl = document.getElementById('completionMsg');
+
+            if (activeItem.target) {
+                progressEl.innerText = `العداد: ${count} | الهدف: ${activeItem.target}`;
+                if (count >= activeItem.target) {
+                    msgEl.innerText = completionMessages[count % completionMessages.length];
+                    if(count === activeItem.target) showToast('ما شاء الله، اكتمل الهدف 🌿');
+                    msgEl.style.display = "block";
+                } else {
+                    msgEl.style.display = "none";
+                }
+            } else {
+                progressEl.innerText = `العداد: ${count} | الهدف: ∞`;
+                msgEl.style.display = "none";
+            }
+
+            listContainer.innerHTML = '';
+
+            if (currentTrack === 'pick') {
+                listContainer.style.display = 'none';
+            } else {
+                listContainer.style.display = 'flex';
+
+                if (currentTrack === 'post_prayer') {
+                    const backBtn = document.createElement('div');
+                    backBtn.className = 'dhikr-option-card';
+                    backBtn.style.backgroundColor = 'var(--rose-light)';
+                    backBtn.innerHTML = `
+                        <div class="dhikr-option-title" style="color:var(--rose-accent)">
+                            <i class="fa-solid fa-arrow-right"></i> تغيير الصيغة
+                        </div>
+                    `;
+                    backBtn.onclick = function() {
+                        selectedFormulaIndex = null;
+                        updateUI();
+                    };
+                    listContainer.appendChild(backBtn);
+                }
+
+                const currentList = (currentTrack === 'open') ? openDhikrList : postPrayerFormulas[selectedFormulaIndex].items;
+
+                currentList.forEach((item, index) => {
+                    const val = getCount(item.id);
+                    const targetStr = item.target ? `×${item.target}` : 'سبّح';
+                    const isSelected = index === currentDhikrIndex ? 'selected' : '';
+
+                    const card = document.createElement('div');
+                    card.className = `dhikr-option-card ${isSelected}`;
+                    card.innerHTML = `
+                        <div>
+                            <div class="dhikr-option-title">${item.title}</div>
+                            <div class="dhikr-option-sub">${item.meaning}</div>
+                        </div>
+                        <div style="font-weight:700; color:var(--rose-accent);">${val} (${targetStr})</div>
+                    `;
+                    card.onclick = function() {
+                        currentDhikrIndex = index;
+                        updateUI();
+                    };
+                    listContainer.appendChild(card);
+                });
+            }
+        }
+
+        document.getElementById('mainTapBtn').addEventListener('click', function() {
+            const activeItem = getActiveItem();
+            if (!activeItem) return;
+            let val = getCount(activeItem.id);
+            if (activeItem.target && val >= activeItem.target) return;
+            setCount(activeItem.id, val + 1);
+            todayTotal++;
+            saveState();
+            playTick();
+            const b=document.getElementById('mainTapBtn'); b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop');
+            updateUI();
+        });
+
+        function resetCurrent() {
+            const activeItem = getActiveItem();
+            if (activeItem) {
+                setCount(activeItem.id, 0);
+                saveState();
+                showToast('تم تصفير العداد');
+                updateUI();
+            }
+        }
+
+        document.getElementById('headerResetBtn').addEventListener('click', resetCurrent);
+        document.getElementById('actionResetBtn').addEventListener('click', resetCurrent);
+
+        document.getElementById('pickAnotherBtn').addEventListener('click', function() {
+            let randomIndex = Math.floor(Math.random() * openDhikrList.length);
+            currentPickItem = openDhikrList[randomIndex];
+            updateUI();
+        });
+
+        function setTrack(track, el) {
+            document.querySelectorAll('.track-chip').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            currentTrack = track;
+            currentDhikrIndex = 0;
+            selectedFormulaIndex = null;
+            if (track === 'pick') {
+                currentPickItem = openDhikrList[Math.floor(Math.random() * openDhikrList.length)];
+            }
+            updateUI();
+        }
+
+        document.getElementById('chipOpen').addEventListener('click', function() { setTrack('open', this); });
+        document.getElementById('chipPick').addEventListener('click', function() { setTrack('pick', this); });
+        document.getElementById('chipPost').addEventListener('click', function() { setTrack('post_prayer', this); });
+
+        document.getElementById('soundBtn').addEventListener('click', function(){
+            soundEnabled=!soundEnabled; localStorage.setItem('misbahati_sound', soundEnabled ? '1':'0');
+            this.innerHTML = soundEnabled ? '<i class="fa-solid fa-volume-high"></i>' : '<i class="fa-solid fa-volume-xmark"></i>';
+            showToast(soundEnabled ? 'تم تشغيل صوت اللمسة' : 'تم كتم صوت اللمسة');
+        });
+        document.getElementById('backBtn').addEventListener('click', function(){
+            if(currentTrack==='post_prayer' && selectedFormulaIndex!==null){ selectedFormulaIndex=null; updateUI(); return; }
+            showToast('يمكنك استخدام زر الرجوع في هاتفك للعودة');
+        });
+        document.getElementById('mainTapBtn').setAttribute('role','button');
+        document.getElementById('mainTapBtn').setAttribute('tabindex','0');
+        document.getElementById('mainTapBtn').addEventListener('keydown', function(e){
+            if(e.key==='Enter' || e.key===' '){ e.preventDefault(); this.click(); }
+        });
+
+        const sb=document.getElementById('soundBtn');
+        sb.innerHTML = soundEnabled ? '<i class="fa-solid fa-volume-high"></i>' : '<i class="fa-solid fa-volume-xmark"></i>';
+
+        // إضافة الصوت لجميع الأزرار وبطاقات الاختيار دون أي تغيير في الشكل أو الهيكل.
+        document.addEventListener('click', function(e){
+            const target = e.target.closest('button, .track-chip, .dhikr-option-card, .formula-card, .tap-button');
+            if(!target || target.id === 'mainTapBtn' || target.id === 'soundBtn') return;
+            playButtonSound();
+        });
+
+        updateUI();
+    });
+</script>
+
+</body>
+</html>
+
+    
